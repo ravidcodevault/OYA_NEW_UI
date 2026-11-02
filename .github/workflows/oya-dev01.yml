@@ -1,0 +1,62 @@
+name: Build and deploy OYA New UI to OYA-DEV01
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: oya-new-ui-oya-dev01
+  cancel-in-progress: false
+
+jobs:
+  build:
+    if: github.repository == 'ravidcodevault/OYA_NEW_UI' && github.ref == 'refs/heads/main'
+    runs-on: windows-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+      - name: Publish Windows application
+        shell: pwsh
+        run: |
+          dotnet publish OYA_Web_Application.csproj -c Release -r win-x64 --self-contained true -o "$env:RUNNER_TEMP\oya-new-ui-package\app" -p:DebugType=None -p:DebugSymbols=false --nologo
+          if ($LASTEXITCODE -ne 0) { throw 'Publish failed.' }
+          $package = "$env:RUNNER_TEMP\oya-new-ui-package"
+          foreach ($file in @('appsettings.json','appsettings.Production.json','Templates','App_Data')) {
+            if (Test-Path (Join-Path "$package\app" $file)) { throw "Private runtime content unexpectedly included: $file" }
+          }
+          @{commit=$env:GITHUB_SHA;run=$env:GITHUB_RUN_ID} | ConvertTo-Json | Set-Content "$package\app\wwwroot\deployment-version.json" -Encoding utf8
+          New-Item -ItemType Directory "$package\deployment" -Force | Out-Null
+          Copy-Item deployment\Deploy-OyaNewUi.ps1 "$package\deployment\Deploy-OyaNewUi.ps1"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: oya-new-ui-${{ github.sha }}
+          path: ${{ runner.temp }}/oya-new-ui-package/
+          if-no-files-found: error
+          retention-days: 7
+  deploy:
+    needs: build
+    if: github.repository == 'ravidcodevault/OYA_NEW_UI' && github.ref == 'refs/heads/main'
+    runs-on: [self-hosted, Windows, X64, oya-dev01-new-ui]
+    timeout-minutes: 20
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: oya-new-ui-${{ github.sha }}
+          path: ${{ runner.temp }}/oya-new-ui-package-${{ github.run_id }}-${{ github.run_attempt }}
+      - name: Deploy only to OYA-DEV01 and validate IIS
+        shell: powershell
+        env:
+          PACKAGE_PATH: ${{ runner.temp }}/oya-new-ui-package-${{ github.run_id }}-${{ github.run_attempt }}
+          EXPECTED_COMMIT: ${{ github.sha }}
+        run: |
+          & "$env:PACKAGE_PATH\deployment\Deploy-OyaNewUi.ps1" -PackagePath $env:PACKAGE_PATH -ExpectedCommit $env:EXPECTED_COMMIT
+          if ($LASTEXITCODE -ne 0) { throw 'Deployment failed.' }
