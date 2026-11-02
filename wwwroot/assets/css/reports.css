@@ -1,0 +1,945 @@
+/* =========================================================
+   OYA REPORTS PAGE
+   ========================================================= */
+
+.oya-reports-page {
+    min-height: 100vh;
+    padding: 34px 38px 50px;
+    background: #f7f8fa;
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.oya-reports-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.oya-reports-header-left {
+    min-width: 0;
+}
+
+.oya-reports-breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+    color: #9a7d8b;
+    font-size: 12px;
+}
+
+    .oya-reports-breadcrumb strong {
+        color: #705866;
+        font-weight: 600;
+    }
+
+.oya-breadcrumb-arrow {
+    color: #d8b9c8;
+}
+
+.oya-reports-header h1 {
+    margin: 0;
+    color: #101828;
+    font-size: 30px;
+    line-height: 1.2;
+    font-weight: 750;
+    letter-spacing: -0.5px;
+}
+
+.oya-reports-header p {
+    margin: 7px 0 0;
+    color: #8490a3;
+    font-size: 13px;
+}
+
+.oya-reports-date {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    padding: 11px 15px;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    color: #475467;
+    font-size: 12px;
+    font-weight: 600;
+    box-shadow: 0 5px 18px rgba(16, 24, 40, 0.04);
+    white-space: nowrap;
+}
+
+.oya-date-icon {
+    color: #e9007e;
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   SECTION TITLE
+   ========================================================= */
+
+.oya-report-section-title {
+    margin-bottom: 16px;
+}
+
+    .oya-report-section-title h2 {
+        margin: 0;
+        color: #101828;
+        font-size: 17px;
+        font-weight: 700;
+    }
+
+    .oya-report-section-title p {
+        margin: 4px 0 0;
+        color: #8490a3;
+        font-size: 12px;
+    }
+
+
+/* =========================================================
+   SALES OVERVIEW
+   ========================================================= */
+
+.oya-sales-overview {
+    margin-bottom: 24px;
+}
+
+.oya-sales-stat-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.oya-sales-stat-card {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    min-height: 118px;
+    padding: 22px;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 16px;
+    box-shadow: 0 7px 24px rgba(16, 24, 40, 0.045);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+    .oya-sales-stat-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 30px rgba(16, 24, 40, 0.07);
+    }
+
+.oya-sales-stat-icon {
+    width: 48px;
+    height: 48px;
+    flex: 0 0 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 13px;
+    font-size: 19px;
+    font-weight: 750;
+}
+
+    .oya-sales-stat-icon.oya-blue {
+        color: #e9007e;
+        background: #fff0f7;
+    }
+
+    .oya-sales-stat-icon.oya-green {
+        color: #159570;
+        background: #ecfaf5;
+    }
+
+    .oya-sales-stat-icon.oya-purple {
+        color: #7255c9;
+        background: #f2efff;
+    }
+
+.oya-sales-stat-content {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+    .oya-sales-stat-content span {
+        color: #667085;
+        font-size: 12px;
+        font-weight: 600;
+    }
+
+    .oya-sales-stat-content strong {
+        margin-top: 6px;
+        color: #101828;
+        font-size: 22px;
+        line-height: 1.15;
+        font-weight: 750;
+    }
+
+    .oya-sales-stat-content small {
+        margin-top: 5px;
+        color: #98a2b3;
+        font-size: 10px;
+    }
+
+
+/* =========================================================
+   MAIN REPORT GRID
+   ========================================================= */
+
+.oya-reports-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(360px, 0.9fr);
+    gap: 22px;
+    align-items: stretch;
+}
+
+
+/* =========================================================
+   AVAILABLE REPORTS CARD
+   ========================================================= */
+
+.oya-available-reports {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 16px;
+    box-shadow: 0 7px 24px rgba(16, 24, 40, 0.045);
+    overflow: hidden;
+}
+
+.oya-report-card-header {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    padding: 22px 24px;
+    border-bottom: 1px solid #eaecf0;
+}
+
+.oya-report-header-icon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 11px;
+    background: #fff0f7;
+    color: #e9007e;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.oya-report-card-header h2 {
+    margin: 0;
+    color: #101828;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.oya-report-card-header p {
+    margin: 4px 0 0;
+    color: #8490a3;
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   REPORT LIST
+   ========================================================= */
+
+.oya-report-list {
+    padding: 7px 24px 10px;
+}
+
+.oya-report-row {
+    display: grid;
+    grid-template-columns: 32px 40px minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 13px;
+    min-height: 79px;
+    border-bottom: 1px solid #eaecf0;
+}
+
+    .oya-report-row:last-child {
+        border-bottom: 0;
+    }
+
+.oya-report-number {
+    color: #98a2b3;
+    font-size: 10px;
+    font-weight: 750;
+    letter-spacing: 0.5px;
+}
+
+.oya-report-icon {
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    background: #fff5f9;
+    color: #e9007e;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.oya-report-info {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+    .oya-report-info strong {
+        color: #344054;
+        font-size: 13px;
+        font-weight: 650;
+    }
+
+    .oya-report-info span {
+        margin-top: 4px;
+        color: #98a2b3;
+        font-size: 10px;
+    }
+
+.oya-report-download-btn {
+    min-width: 82px;
+    height: 34px;
+    padding: 0 13px;
+    border: 0;
+    border-radius: 8px;
+    background: #e9007e;
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 650;
+    cursor: pointer;
+    transition: background 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+    .oya-report-download-btn:hover {
+        background: #c9006d;
+        transform: translateY(-1px);
+        box-shadow: 0 6px 16px rgba(233, 0, 126, 0.18);
+    }
+
+
+/* =========================================================
+   REPORT ACTION BUTTONS
+   ========================================================= */
+
+.oya-report-actions {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.oya-report-small-btn {
+    height: 32px;
+    padding: 0 11px;
+    border: 1px solid #e9007e;
+    border-radius: 8px;
+    background: #fff0f7;
+    color: #d60073;
+    font-size: 10px;
+    font-weight: 650;
+    cursor: pointer;
+    transition: all 0.18s ease;
+}
+
+    .oya-report-small-btn:hover {
+        background: #e9007e;
+        color: #ffffff;
+    }
+
+    .oya-report-small-btn.secondary {
+        border-color: #d0d5dd;
+        background: #ffffff;
+        color: #475467;
+    }
+
+        .oya-report-small-btn.secondary:hover {
+            border-color: #e9007e;
+            background: #fff5f9;
+            color: #d60073;
+        }
+
+
+/* =========================================================
+   COMMISSION SECTION
+   ========================================================= */
+
+.oya-commission-section {
+    display: flex;
+    flex-direction: column;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 16px;
+    box-shadow: 0 7px 24px rgba(16, 24, 40, 0.045);
+    overflow: hidden;
+}
+
+.oya-commission-top {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    padding: 22px 24px;
+}
+
+.oya-commission-icon {
+    width: 40px;
+    height: 40px;
+    flex: 0 0 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 11px;
+    background: #fff0f7;
+    color: #e9007e;
+    font-size: 17px;
+    font-weight: 750;
+}
+
+.oya-commission-top h2 {
+    margin: 0;
+    color: #101828;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.oya-commission-top p {
+    margin: 4px 0 0;
+    color: #8490a3;
+    font-size: 11px;
+    line-height: 1.5;
+}
+
+.oya-commission-divider {
+    height: 1px;
+    background: #eaecf0;
+}
+
+
+/* =========================================================
+   COMMISSION FORM
+   ========================================================= */
+
+.oya-commission-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    padding: 24px;
+}
+
+
+/* =========================================================
+   FORM GROUP
+   ========================================================= */
+
+.oya-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+    .oya-form-group label {
+        color: #344054;
+        font-size: 11px;
+        font-weight: 650;
+    }
+
+
+/* =========================================================
+   HIDE OLD COMMISSION DROPDOWN
+   ========================================================= */
+
+/*
+   The CommissionReport.cs backend does NOT change.
+   The old report selector is no longer displayed.
+*/
+
+.oya-report-select {
+    display: none !important;
+}
+
+
+/* =========================================================
+   INPUTS
+   ========================================================= */
+
+.oya-report-input {
+    width: 100%;
+    height: 40px;
+    box-sizing: border-box;
+    border: 1px solid #d0d5dd;
+    border-radius: 9px;
+    background: #ffffff;
+    color: #344054;
+    font-family: inherit;
+    font-size: 12px;
+    outline: none;
+    padding: 0 10px;
+    transition: border-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+    .oya-report-input:hover {
+        border-color: #b8bec8;
+    }
+
+    .oya-report-input:focus {
+        border-color: #e9007e;
+        box-shadow: 0 0 0 3px rgba(233, 0, 126, 0.10);
+    }
+
+
+/* =========================================================
+   DATE RANGE
+   ========================================================= */
+
+.oya-date-range {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.oya-date-input-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+    .oya-date-input-wrapper span {
+        color: #667085;
+        font-size: 9px;
+        font-weight: 600;
+    }
+
+
+/* =========================================================
+   COMMISSION REPORT BUTTON AREA
+   ========================================================= */
+
+.oya-commission-report-buttons {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+    width: 100%;
+}
+
+
+    /*
+   Supports buttons/forms placed directly in the
+   commission button container.
+*/
+
+    .oya-commission-report-buttons form {
+        width: 100%;
+        margin: 0;
+    }
+
+    .oya-commission-report-buttons button,
+    .oya-commission-report-buttons .oya-commission-download {
+        width: 100%;
+        min-height: 40px;
+        padding: 0 10px;
+        border: 1px solid #e9007e;
+        border-radius: 8px;
+        background: #e9007e;
+        color: #ffffff;
+        font-family: inherit;
+        font-size: 11px;
+        font-weight: 700;
+        cursor: pointer;
+        white-space: nowrap;
+        transition: background 0.18s ease, border-color 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
+    }
+
+        .oya-commission-report-buttons button:hover,
+        .oya-commission-report-buttons .oya-commission-download:hover {
+            background: #c9006d;
+            border-color: #c9006d;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 16px rgba(233, 0, 126, 0.16);
+        }
+
+
+/* =========================================================
+   OLD SINGLE COMMISSION DOWNLOAD BUTTON
+   ========================================================= */
+
+.oya-commission-download {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    min-height: 42px;
+    margin-top: 3px;
+    padding: 0 15px;
+    border: 0;
+    border-radius: 9px;
+    background: #e9007e;
+    color: #ffffff;
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+    .oya-commission-download:hover {
+        background: #c9006d;
+        transform: translateY(-1px);
+        box-shadow: 0 7px 17px rgba(233, 0, 126, 0.20);
+    }
+
+    .oya-commission-download span {
+        font-size: 15px;
+    }
+
+
+/* =========================================================
+   COMMISSION BUTTON VARIATIONS
+   ========================================================= */
+
+.oya-commission-report-buttons .ch1,
+.oya-commission-report-buttons .os2,
+.oya-commission-report-buttons .ep3,
+.oya-commission-report-buttons .ag4,
+.oya-commission-report-buttons .os0r,
+.oya-commission-report-buttons .report-06 {
+    background: #e9007e;
+    color: #ffffff;
+}
+
+
+/* =========================================================
+   GENERIC BUTTON SUPPORT
+   ========================================================= */
+
+.oya-commission-section button {
+    font-family: inherit;
+}
+
+    .oya-commission-section button:disabled {
+        opacity: 0.55;
+        cursor: not-allowed;
+        transform: none !important;
+        box-shadow: none !important;
+    }
+
+
+/* =========================================================
+   DATE INPUT CALENDAR ICON
+   ========================================================= */
+
+.oya-report-input[type="date"] {
+    appearance: none;
+    -webkit-appearance: none;
+    position: relative;
+}
+
+    .oya-report-input[type="date"]::-webkit-calendar-picker-indicator {
+        cursor: pointer;
+        opacity: 0.75;
+        width: 15px;
+        height: 15px;
+    }
+
+        .oya-report-input[type="date"]::-webkit-calendar-picker-indicator:hover {
+            opacity: 1;
+        }
+
+
+/* =========================================================
+   REMOVE OLD SELECT SPACING
+   ========================================================= */
+
+.oya-commission-form > .oya-form-group:has(.oya-report-select) {
+    display: none !important;
+}
+
+
+/* =========================================================
+   REPORT CARD HOVER
+   ========================================================= */
+
+.oya-sales-stat-card,
+.oya-available-reports,
+.oya-commission-section {
+    border-color: #e5e7eb;
+}
+
+    .oya-sales-stat-card:hover,
+    .oya-available-reports:hover,
+    .oya-commission-section:hover {
+        border-color: #e8c2d5;
+    }
+
+
+/* =========================================================
+   PINK THEME
+   ========================================================= */
+
+.oya-report-header-icon {
+    background: #fff0f7;
+    color: #e9007e;
+}
+
+.oya-report-icon {
+    background: #fff5f9;
+    color: #e9007e;
+}
+
+.oya-report-download-btn {
+    background: linear-gradient( 135deg, #ef1689 0%, #d90073 100% );
+    box-shadow: 0 5px 14px rgba(233, 0, 126, 0.12);
+}
+
+    .oya-report-download-btn:hover {
+        background: linear-gradient( 135deg, #e9007e 0%, #c9006d 100% );
+        box-shadow: 0 8px 20px rgba(233, 0, 126, 0.20);
+    }
+
+.oya-report-small-btn {
+    border-color: #e9007e;
+    background: #fff0f7;
+    color: #d90073;
+}
+
+    .oya-report-small-btn:hover {
+        background: #e9007e;
+        color: #ffffff;
+    }
+
+    .oya-report-small-btn.secondary {
+        border-color: #d0d5dd;
+        background: #ffffff;
+        color: #475467;
+    }
+
+        .oya-report-small-btn.secondary:hover {
+            border-color: #e8a8c3;
+            background: #fff5f9;
+            color: #49323f;
+        }
+
+.oya-report-select:focus,
+.oya-report-input:focus {
+    border-color: #e9007e;
+    box-shadow: 0 0 0 3px rgba(233, 0, 126, 0.10);
+}
+
+.oya-commission-icon {
+    background: #fff0f7;
+    color: #e9007e;
+}
+
+
+/* =========================================================
+   PAGE SCROLLBAR
+   ========================================================= */
+
+.oya-reports-page {
+    scrollbar-color: #d8a4bd #f7f8fa;
+    scrollbar-width: thin;
+}
+
+    .oya-reports-page::-webkit-scrollbar {
+        width: 7px;
+    }
+
+    .oya-reports-page::-webkit-scrollbar-track {
+        background: #f7f8fa;
+    }
+
+    .oya-reports-page::-webkit-scrollbar-thumb {
+        background: #d8a4bd;
+        border-radius: 10px;
+    }
+
+        .oya-reports-page::-webkit-scrollbar-thumb:hover {
+            background: #c78ca9;
+        }
+
+
+    /* =========================================================
+   TEXT SELECTION
+   ========================================================= */
+
+    .oya-reports-page ::selection {
+        background: #f7c5d9;
+        color: #24121c;
+    }
+
+
+/* =========================================================
+   RESPONSIVE - 1100
+   ========================================================= */
+
+@media (max-width: 1100px) {
+
+    .oya-reports-page {
+        padding: 28px 25px 40px;
+    }
+
+    .oya-reports-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* =========================================================
+   RESPONSIVE - 900
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    .oya-sales-stat-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .oya-commission-report-buttons {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+
+/* =========================================================
+   RESPONSIVE - 800
+   ========================================================= */
+
+@media (max-width: 800px) {
+
+    .oya-sales-stat-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .oya-reports-header {
+        flex-direction: column;
+    }
+
+    .oya-report-row {
+        grid-template-columns: 30px 38px minmax(0, 1fr);
+        padding: 12px 0;
+    }
+
+        .oya-report-row form,
+        .oya-report-actions {
+            grid-column: 3;
+            justify-self: start;
+        }
+
+    .oya-commission-report-buttons {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+
+/* =========================================================
+   RESPONSIVE - 600
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    .oya-date-range {
+        grid-template-columns: 1fr;
+    }
+
+    .oya-commission-report-buttons {
+        grid-template-columns: 1fr 1fr;
+    }
+
+        .oya-commission-report-buttons button,
+        .oya-commission-report-buttons .oya-commission-download {
+            min-height: 42px;
+        }
+}
+
+
+/* =========================================================
+   RESPONSIVE - 550
+   ========================================================= */
+
+@media (max-width: 550px) {
+
+    .oya-reports-page {
+        padding: 22px 15px 35px;
+    }
+
+    .oya-reports-header h1 {
+        font-size: 25px;
+    }
+
+    .oya-report-card-header,
+    .oya-commission-top {
+        padding: 18px;
+    }
+
+    .oya-report-list {
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+
+    .oya-commission-form {
+        padding: 18px;
+    }
+
+    .oya-date-range {
+        grid-template-columns: 1fr;
+    }
+
+    .oya-commission-report-buttons {
+        grid-template-columns: 1fr;
+    }
+
+        .oya-commission-report-buttons button,
+        .oya-commission-report-buttons .oya-commission-download {
+            min-height: 42px;
+        }
+}
+
+
+/* =========================================================
+   FINAL OVERRIDES
+   ========================================================= */
+
+/*
+   IMPORTANT:
+   No pink background is applied to the page itself.
+   Pink is only used for buttons, icons and focus states.
+*/
+
+html,
+body {
+    background: #f7f8fa;
+}
+
+.oya-reports-page {
+    background: #f7f8fa !important;
+}
+
+/*
+   Make sure the old commission dropdown never appears.
+*/
+
+.oya-commission-section .oya-report-select,
+.oya-commission-section select {
+    display: none !important;
+}
+
+/*
+   Keep the commission section clean.
+*/
+
+.oya-commission-section {
+    background: #ffffff;
+}
+
+    .oya-commission-section input {
+        background: #ffffff;
+    }

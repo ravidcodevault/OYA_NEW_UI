@@ -1,0 +1,851 @@
+﻿/* =========================================================
+   OYA SIDEBAR
+   Minimal / Black / Clean
+   Pink used ONLY as an accent
+   ========================================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   SIDEBAR
+   ========================================================= */
+
+.oya-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 224px;
+    display: flex;
+    flex-direction: column;
+    background: #08090c;
+    border-right: 1px solid #1b1d22;
+    z-index: 1000;
+    overflow-x: hidden;
+    overflow-y: auto;
+    font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+}
+
+
+/* =========================================================
+   BRAND
+   ========================================================= */
+
+.oya-sidebar-brand {
+    height: 76px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0 18px;
+    border-bottom: 1px solid #1b1d22;
+    flex-shrink: 0;
+}
+
+
+/* =========================================================
+   LOGO MARK
+   ========================================================= */
+
+.oya-logo-mark {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border-radius: 11px;
+    background: linear-gradient( 135deg, #ff1493 0%, #ed087f 100% );
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: 800;
+    box-shadow: 0 5px 18px rgba(255, 20, 147, 0.25);
+}
+
+
+/* =========================================================
+   BRAND TEXT
+   ========================================================= */
+
+.oya-logo-text {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    line-height: 1.15;
+}
+
+    .oya-logo-text strong {
+        color: #ffffff;
+        font-size: 14px;
+        font-weight: 800;
+        letter-spacing: 0.1px;
+    }
+
+    .oya-logo-text span {
+        margin-top: 4px;
+        color: #747985;
+        font-size: 9px;
+        font-weight: 500;
+        letter-spacing: 0.1px;
+    }
+
+
+/* =========================================================
+   NAVIGATION AREA
+   ========================================================= */
+
+.oya-sidebar-nav {
+    flex: 1;
+    padding: 22px 10px;
+    min-height: 0;
+}
+
+
+/* =========================================================
+   NAVIGATION SECTION TITLE
+   ========================================================= */
+
+.oya-nav-section {
+    padding: 0 13px;
+    margin-top: 16px;
+    margin-bottom: 8px;
+    color: #666b75;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.9px;
+    text-transform: uppercase;
+}
+
+    .oya-nav-section:first-child {
+        margin-top: 0;
+    }
+
+
+/* =========================================================
+   NAV ITEM
+   ========================================================= */
+
+.oya-nav-item {
+    position: relative;
+    width: 100%;
+    min-height: 42px;
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    padding: 0 12px;
+    margin-bottom: 4px;
+    border-radius: 9px;
+    background: transparent;
+    color: #aeb3bd;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 600;
+    transition: background 0.18s ease, color 0.18s ease, transform 0.18s ease;
+}
+
+
+    /* =========================================================
+   NAV ITEM - REMOVE DEFAULT LINK COLOR
+   ========================================================= */
+
+    .oya-nav-item,
+    .oya-nav-item:visited,
+    .oya-nav-item:focus,
+    .oya-nav-item:active {
+        color: #aeb3bd;
+        text-decoration: none;
+    }
+
+
+        /* =========================================================
+   NAV ITEM HOVER
+   ========================================================= */
+
+        .oya-nav-item:hover {
+            background: #14161b;
+            color: #ffffff;
+            text-decoration: none;
+            transform: translateX(1px);
+        }
+
+
+        /* =========================================================
+   ACTIVE NAV ITEM
+   ========================================================= */
+
+        .oya-nav-item.active {
+            background: rgba(236, 8, 127, 0.10);
+            color: #ffffff;
+            font-weight: 700;
+        }
+
+
+            /* =========================================================
+   ACTIVE ITEM LEFT INDICATOR
+   ========================================================= */
+
+            .oya-nav-item.active::before {
+                content: "";
+                position: absolute;
+                left: 0;
+                top: 7px;
+                bottom: 7px;
+                width: 3px;
+                border-radius: 0 4px 4px 0;
+                background: #ff1493;
+            }
+
+
+/* =========================================================
+   NAV ICON
+   ========================================================= */
+
+.oya-nav-icon {
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border-radius: 8px;
+    background: #15171d;
+    color: #858b96;
+    font-size: 13px;
+    transition: background 0.18s ease, color 0.18s ease, box-shadow 0.18s ease;
+}
+
+
+/* =========================================================
+   HOVER ICON
+   ========================================================= */
+
+.oya-nav-item:hover .oya-nav-icon {
+    background: #20232a;
+    color: #ffffff;
+}
+
+
+/* =========================================================
+   ACTIVE ICON
+   ========================================================= */
+
+.oya-nav-item.active .oya-nav-icon {
+    background: #ffffff;
+    color: #33363d;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+
+
+    /* =========================================================
+   ACTIVE ICON - DO NOT MAKE TEXT PINK
+   ========================================================= */
+
+    .oya-nav-item.active .oya-nav-icon i,
+    .oya-nav-item.active .oya-nav-icon svg {
+        color: #33363d;
+    }
+
+
+/* =========================================================
+   NAVIGATION TEXT
+   ========================================================= */
+
+.oya-nav-item > span:not(.oya-nav-icon) {
+    color: #aeb3bd;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: color 0.18s ease;
+}
+
+
+/* =========================================================
+   HOVER TEXT
+   ========================================================= */
+
+.oya-nav-item:hover > span:not(.oya-nav-icon) {
+    color: #ffffff;
+}
+
+
+/* =========================================================
+   ACTIVE TEXT
+   ========================================================= */
+
+.oya-nav-item.active > span:not(.oya-nav-icon) {
+    color: #ffffff;
+}
+
+
+/* =========================================================
+   IMPORTANT:
+   STOP OTHER STYLES FROM TURNING NAV TEXT PINK
+   ========================================================= */
+
+.oya-nav-item > span,
+.oya-nav-item > span:not(.oya-nav-icon),
+.oya-nav-item.active > span,
+.oya-nav-item:hover > span {
+    text-decoration: none;
+}
+
+
+/* =========================================================
+   SIDEBAR BOTTOM
+   ========================================================= */
+
+.oya-sidebar-bottom {
+    padding: 14px 10px;
+    border-top: 1px solid #1b1d22;
+    flex-shrink: 0;
+}
+
+
+/* =========================================================
+   SETTINGS ITEM
+   ========================================================= */
+
+.oya-settings-item {
+    color: #aeb3bd !important;
+}
+
+    .oya-settings-item:hover {
+        color: #ffffff !important;
+    }
+
+
+/* =========================================================
+   USER CARD
+   ========================================================= */
+
+.oya-user-card {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+    padding: 9px;
+    border: 1px solid #25272d;
+    border-radius: 11px;
+    background: #0e1014;
+    transition: background 0.18s ease, border-color 0.18s ease;
+}
+
+    .oya-user-card:hover {
+        background: #111318;
+        border-color: #30333a;
+    }
+
+
+/* =========================================================
+   USER AVATAR
+   ========================================================= */
+
+.oya-user-avatar {
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border-radius: 9px;
+    background: linear-gradient( 135deg, #ff1493 0%, #e9007e 100% );
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 800;
+    box-shadow: 0 5px 15px rgba(255, 20, 147, 0.18);
+}
+
+
+/* =========================================================
+   USER INFORMATION
+   ========================================================= */
+
+.oya-user-info {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+    .oya-user-info strong {
+        display: block;
+        overflow: hidden;
+        color: #ffffff;
+        font-size: 10px;
+        font-weight: 700;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .oya-user-info span {
+        display: block;
+        margin-top: 3px;
+        color: #737985;
+        font-size: 8px;
+        white-space: nowrap;
+    }
+
+
+/* =========================================================
+   LOGOUT BUTTON
+   ========================================================= */
+
+.oya-logout {
+    width: 100%;
+    min-height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 8px;
+    border: 0;
+    border-radius: 8px;
+    background: #ffffff;
+    color: #777b84;
+    text-decoration: none;
+    font-size: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.18s ease, color 0.18s ease, transform 0.18s ease;
+}
+
+
+    /* =========================================================
+   LOGOUT HOVER
+   ========================================================= */
+
+    .oya-logout:hover {
+        background: #f1f2f4;
+        color: #22252b;
+        text-decoration: none;
+        transform: translateY(-1px);
+    }
+
+
+/* =========================================================
+   LOGOUT ICON
+   ========================================================= */
+
+.oya-logout-icon {
+    color: inherit;
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   MAIN CONTENT
+   ========================================================= */
+
+.oya-main {
+    min-height: 100vh;
+    margin-left: 224px;
+    background: #f7f8fa;
+    box-sizing: border-box;
+    transition: margin-left 0.2s ease;
+}
+
+
+/* =========================================================
+   SIDEBAR SCROLLBAR
+   ========================================================= */
+
+.oya-sidebar::-webkit-scrollbar {
+    width: 4px;
+}
+
+.oya-sidebar::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.oya-sidebar::-webkit-scrollbar-thumb {
+    background: #292c33;
+    border-radius: 10px;
+}
+
+    .oya-sidebar::-webkit-scrollbar-thumb:hover {
+        background: #3a3e47;
+    }
+
+
+/* =========================================================
+   FIREFOX SCROLLBAR
+   ========================================================= */
+
+.oya-sidebar {
+    scrollbar-width: thin;
+    scrollbar-color: #292c33 transparent;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 1100px) {
+
+    .oya-sidebar {
+        width: 210px;
+    }
+
+    .oya-main {
+        margin-left: 210px;
+    }
+}
+
+
+/* =========================================================
+   SMALL TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    .oya-sidebar {
+        width: 190px;
+    }
+
+    .oya-main {
+        margin-left: 190px;
+    }
+
+    .oya-sidebar-brand {
+        padding: 0 15px;
+    }
+
+    .oya-sidebar-nav {
+        padding: 18px 8px;
+    }
+
+    .oya-nav-item {
+        font-size: 11px;
+    }
+}
+
+
+/* =========================================================
+   MOBILE / COLLAPSED SIDEBAR
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+    .oya-sidebar {
+        width: 72px;
+        overflow-x: hidden;
+    }
+
+
+    /* -----------------------------------------
+       BRAND
+       ----------------------------------------- */
+
+    .oya-sidebar-brand {
+        height: 70px;
+        justify-content: center;
+        padding: 0;
+    }
+
+    .oya-logo-text {
+        display: none;
+    }
+
+
+    /* -----------------------------------------
+       NAV
+       ----------------------------------------- */
+
+    .oya-sidebar-nav {
+        padding: 18px 8px;
+    }
+
+    .oya-nav-section {
+        display: none;
+    }
+
+    .oya-nav-item {
+        justify-content: center;
+        width: 100%;
+        padding: 0;
+        gap: 0;
+    }
+
+        .oya-nav-item > span:not(.oya-nav-icon) {
+            display: none;
+        }
+
+
+    /* -----------------------------------------
+       ICON
+       ----------------------------------------- */
+
+    .oya-nav-icon {
+        width: 36px;
+        height: 36px;
+        border-radius: 9px;
+        font-size: 14px;
+    }
+
+
+    /* -----------------------------------------
+       ACTIVE INDICATOR
+       ----------------------------------------- */
+
+    .oya-nav-item.active::before {
+        top: 6px;
+        bottom: 6px;
+        width: 3px;
+    }
+
+
+    /* -----------------------------------------
+       BOTTOM
+       ----------------------------------------- */
+
+    .oya-sidebar-bottom {
+        padding: 10px 8px;
+    }
+
+
+    /* -----------------------------------------
+       USER CARD
+       ----------------------------------------- */
+
+    .oya-user-card {
+        justify-content: center;
+        padding: 8px;
+    }
+
+    .oya-user-info {
+        display: none;
+    }
+
+
+    /* -----------------------------------------
+       LOGOUT
+       ----------------------------------------- */
+
+    .oya-logout {
+        min-height: 36px;
+        padding: 0;
+        font-size: 0;
+    }
+
+    .oya-logout-icon {
+        font-size: 13px;
+    }
+
+
+    /* -----------------------------------------
+       MAIN
+       ----------------------------------------- */
+
+    .oya-main {
+        margin-left: 72px;
+    }
+}
+
+
+/* =========================================================
+   VERY SMALL SCREENS
+   ========================================================= */
+
+@media (max-width: 480px) {
+
+    .oya-sidebar {
+        width: 64px;
+    }
+
+    .oya-main {
+        margin-left: 64px;
+    }
+
+    .oya-nav-item {
+        min-height: 40px;
+    }
+
+    .oya-nav-icon {
+        width: 34px;
+        height: 34px;
+    }
+
+    .oya-sidebar-bottom {
+        padding: 8px 6px;
+    }
+}
+
+
+/* =========================================================
+   ACCESSIBILITY
+   ========================================================= */
+
+.oya-nav-item:focus-visible,
+.oya-logout:focus-visible {
+    outline: 2px solid rgba(255, 20, 147, 0.45);
+    outline-offset: 2px;
+}
+
+
+/* =========================================================
+   FINAL COLOR OVERRIDES
+   ========================================================= */
+
+/*
+   Navigation text should NEVER appear pink.
+   Pink is reserved for:
+   - Logo
+   - Active indicator
+   - Small accent elements
+*/
+
+.oya-sidebar .oya-nav-item,
+.oya-sidebar .oya-nav-item span:not(.oya-nav-icon) {
+    color: #aeb3bd;
+}
+
+    .oya-sidebar .oya-nav-item:hover,
+    .oya-sidebar .oya-nav-item:hover span:not(.oya-nav-icon) {
+        color: #ffffff;
+    }
+
+    .oya-sidebar .oya-nav-item.active,
+    .oya-sidebar .oya-nav-item.active span:not(.oya-nav-icon) {
+        color: #ffffff;
+    }
+
+
+/* Prevent common link classes from overriding it */
+
+.oya-sidebar a.oya-nav-item.link-primary,
+.oya-sidebar a.oya-nav-item.text-primary,
+.oya-sidebar a.oya-nav-item.text-danger {
+    color: #aeb3bd !important;
+}
+
+    .oya-sidebar a.oya-nav-item.link-primary:hover,
+    .oya-sidebar a.oya-nav-item.text-primary:hover,
+    .oya-sidebar a.oya-nav-item.text-danger:hover {
+        color: #ffffff !important;
+    }
+
+.oya-sidebar a.oya-nav-item.active {
+    color: #ffffff !important;
+}
+
+
+
+/* =========================================================
+   OYA LOGO MARK
+   ========================================================= */
+
+.oya-logo-mark {
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    border-radius: 12px;
+
+    background: linear-gradient(
+        135deg,
+        #ff1493,
+        #e9007e
+    );
+
+    overflow: hidden;
+
+    box-shadow:
+        0 6px 18px rgba(255, 20, 147, 0.30);
+}
+
+
+/* =========================================================
+   OYA LOGO IMAGE
+   ========================================================= */
+
+.oya-logo-mark img {
+    width: 34px;
+    height: 34px;
+
+    display: block;
+
+    object-fit: contain;
+}
+
+/* =========================================================
+   OYA SIDEBAR BRAND
+   ========================================================= */
+
+.oya-sidebar-brand {
+    height: 76px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0 16px;
+    border-bottom: 1px solid #1b1d22;
+    flex-shrink: 0;
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   OYA LOGO CONTAINER
+   ========================================================= */
+
+.oya-logo-mark {
+    width: 42px;
+    height: 42px;
+    flex: 0 0 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 11px;
+    /* White background so pink logo is visible */
+    background: #000000;
+    overflow: hidden;
+    box-shadow: 0 5px 16px rgba(255, 20, 147, 0.18);
+    box-sizing: border-box;
+}
+
+
+    /* =========================================================
+   ACTUAL OYA LOGO
+   ========================================================= */
+
+    .oya-logo-mark img {
+        width: 38px;
+        height: 38px;
+        display: block;
+        object-fit: contain;
+        margin: 0;
+    }
+
+
+/* =========================================================
+   BRAND TEXT
+   ========================================================= */
+
+.oya-logo-text {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    line-height: 1.15;
+}
+
+    .oya-logo-text strong {
+        color: #ffffff;
+        font-size: 15px;
+        font-weight: 800;
+        letter-spacing: 0.1px;
+    }
+
+    .oya-logo-text span {
+        margin-top: 4px;
+        color: #737985;
+        font-size: 9px;
+        font-weight: 500;
+        white-space: nowrap;
+    }

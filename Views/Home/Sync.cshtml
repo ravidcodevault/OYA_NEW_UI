@@ -1,0 +1,1620 @@
+﻿@model IEnumerable<OYA_Web_Application.Models.Data.QBSync.SycnServices.SyncDetails>
+
+@{
+    ViewData["Title"] = "Sync Status";
+}
+
+<link rel="stylesheet"
+      href="~/assets/css/sync.css"
+      asp-append-version="true" />
+
+@functions {
+
+    private string FormatLastSynced(DateTime date)
+    {
+        if (date == DateTime.MinValue)
+            return "—";
+
+        return date.ToString("MMM dd, yyyy hh:mm tt");
+    }
+
+    private string GetStatusClass(string status)
+    {
+        if (string.IsNullOrWhiteSpace(status))
+            return "pending";
+
+        if (status.Equals("Running", StringComparison.OrdinalIgnoreCase))
+            return "running";
+
+        if (status.Equals("Success", StringComparison.OrdinalIgnoreCase))
+            return "success";
+
+        if (status.Equals("Failed", StringComparison.OrdinalIgnoreCase) ||
+            status.Equals("Error", StringComparison.OrdinalIgnoreCase))
+            return "failed";
+
+        return "pending";
+    }
+
+    private string GetStatusText(string status)
+    {
+        if (string.IsNullOrWhiteSpace(status))
+            return "Pending";
+
+        return status.Trim();
+    }
+
+    private string GetResultIcon(string status)
+    {
+        if (string.IsNullOrWhiteSpace(status))
+            return "•";
+
+        if (status.Equals("Running", StringComparison.OrdinalIgnoreCase))
+            return "↻";
+
+        if (status.Equals("Success", StringComparison.OrdinalIgnoreCase))
+            return "✓";
+
+        if (status.Equals("Failed", StringComparison.OrdinalIgnoreCase) ||
+            status.Equals("Error", StringComparison.OrdinalIgnoreCase))
+            return "!";
+
+        return "•";
+    }
+
+    private bool IsRunning(string status)
+    {
+        return !string.IsNullOrWhiteSpace(status) &&
+               status.Equals("Running", StringComparison.OrdinalIgnoreCase);
+    }
+
+    private bool IsSuccess(string status)
+    {
+        return !string.IsNullOrWhiteSpace(status) &&
+               status.Equals("Success", StringComparison.OrdinalIgnoreCase);
+    }
+
+    private bool IsFailed(string status)
+    {
+        return !string.IsNullOrWhiteSpace(status) &&
+               (
+                   status.Equals("Failed", StringComparison.OrdinalIgnoreCase) ||
+                   status.Equals("Error", StringComparison.OrdinalIgnoreCase)
+               );
+    }
+}
+
+
+<div class="oya-sync-page">
+
+    <!-- =========================================================
+         PAGE HEADER
+         ========================================================= -->
+
+    <div class="oya-sync-page-header">
+
+        <div>
+
+            <div class="oya-breadcrumb">
+                <span>Home</span>
+                <span>›</span>
+                <span>Sync</span>
+            </div>
+
+            <h1>
+                Sync Status
+            </h1>
+
+            <p>
+                Monitor your QuickBooks synchronization status.
+            </p>
+
+        </div>
+
+
+        <!-- =====================================================
+             START SYNC BUTTON
+             ===================================================== -->
+
+        <div class="oya-sync-actions">
+
+            <button type="button"
+                    id="startSyncButton"
+                    class="oya-sync-button">
+
+                <span id="startSyncIcon"
+                      class="oya-sync-button-icon">
+                    ↻
+                </span>
+
+                <span id="startSyncText">
+                    Start Sync Now
+                </span>
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================================================
+         MAIN CARD
+         ========================================================= -->
+
+    <div class="oya-sync-main-card">
+
+
+        <!-- =====================================================
+             SYSTEM STATUS
+             ===================================================== -->
+
+        <div class="oya-sync-top">
+
+            <div class="oya-sync-status">
+
+                <div class="oya-sync-status-icon"
+                     id="syncStatusIcon">
+                    ↻
+                </div>
+
+                <div>
+
+                    <span class="oya-sync-label">
+                        SYSTEM STATUS
+                    </span>
+
+                    <h2 id="syncStatusTitle">
+                        Synchronization Active
+                    </h2>
+
+                    <p id="syncStatusMessage">
+                        Your QuickBooks connection is ready and available.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- CONNECTION -->
+
+            <div class="oya-sync-connected">
+
+                <span class="oya-connected-dot"></span>
+
+                <span id="topConnectionStatus">
+                    Connected
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- =====================================================
+             SUMMARY CARDS
+             ===================================================== -->
+
+        <div class="oya-sync-summary">
+
+
+            <!-- ELEMENT COUNT -->
+
+            <div class="oya-sync-summary-card">
+
+                <div class="oya-summary-icon">
+                    #
+                </div>
+
+                <div class="oya-summary-content">
+
+                    <span>
+                        Sync Elements
+                    </span>
+
+                    <strong id="syncElementCount">
+                        @(Model?.Count() ?? 0)
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <!-- CONNECTION -->
+
+            <div class="oya-sync-summary-card">
+
+                <div class="oya-summary-icon">
+                    ✓
+                </div>
+
+                <div class="oya-summary-content">
+
+                    <span>
+                        Connection
+                    </span>
+
+                    <strong id="summaryConnectionStatus">
+                        Active
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <!-- QUICKBOOKS -->
+
+            <div class="oya-sync-summary-card">
+
+                <div class="oya-summary-icon">
+                    ↻
+                </div>
+
+                <div class="oya-summary-content">
+
+                    <span>
+                        QuickBooks
+                    </span>
+
+                    <strong id="quickBooksStatus">
+                        Connected
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =====================================================
+             TABLE AREA
+             ===================================================== -->
+
+        <div class="oya-sync-table-area">
+
+
+            <!-- TABLE HEADING -->
+
+            <div class="oya-sync-table-heading">
+
+                <div>
+
+                    <h3>
+                        Synchronization Details
+                    </h3>
+
+                    <p>
+                        Current synchronization status for each data element.
+                    </p>
+
+                </div>
+
+
+                <!-- LIVE STATUS -->
+
+                <div class="oya-sync-live-status"
+                     id="liveSyncStatus">
+
+                    <span class="oya-live-dot"></span>
+
+                    <span>
+                        Live status
+                    </span>
+
+                    <span class="oya-refresh-text">
+                        Database status
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 TABLE
+                 ================================================= -->
+
+            <div class="oya-sync-table-container">
+
+                <table class="oya-sync-table"
+                       id="syncTable">
+
+                    <thead>
+
+                        <tr>
+
+                            <th class="oya-sync-col-number">
+                                #
+                            </th>
+
+                            <th>
+                                Sync Element
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                            <th>
+                                Sync Status
+                            </th>
+
+                            <th>
+                                Last Synced
+                            </th>
+
+                            <th>
+                                Description
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="syncTableBody">
+
+                        @if (Model != null && Model.Any())
+                        {
+                            var index = 1;
+
+                            foreach (var item in Model)
+                            {
+                                var status = string.IsNullOrWhiteSpace(item.Status)
+                                    ? "Pending"
+                                    : item.Status.Trim();
+
+                                var description = string.IsNullOrWhiteSpace(item.Description)
+                                    ? "Waiting for synchronization"
+                                    : item.Description.Trim();
+
+                                var statusClass = GetStatusClass(status);
+                                var statusText = GetStatusText(status);
+                                var resultIcon = GetResultIcon(status);
+
+                                var isRunning = IsRunning(status);
+                                var isSuccess = IsSuccess(status);
+                                var isFailed = IsFailed(status);
+
+                                <tr data-sync-index="@index"
+                                    data-sync-id="@item.Id"
+                                    data-sync-type="@item.SyncType"
+                                    data-sync-version="@item.LastSyncedOn.Ticks"
+                                    data-sync-active="@item.IsActive.ToString().ToLowerInvariant()"
+                                    data-db-status="@status">
+
+                                    <!-- NUMBER -->
+
+                                    <td>
+
+                                        <span class="oya-sync-number">
+                                            @index
+                                        </span>
+
+                                    </td>
+
+
+                                    <!-- SYNC ELEMENT -->
+
+                                    <td>
+
+                                        <div class="oya-sync-element">
+
+                                            <div class="oya-sync-element-icon">
+
+                                                @if (!string.IsNullOrWhiteSpace(item.SyncType))
+                                                {
+                                                    @item.SyncType.Substring(0, 1).ToUpper()
+                                                }
+                                                else
+                                                {
+                                                    <text>?</text>
+                                                }
+
+                                            </div>
+
+
+                                            <div class="oya-sync-element-name">
+
+                                                <strong>
+                                                    @(item.SyncType ?? "Unknown")
+                                                </strong>
+
+                                                <span>
+                                                    QuickBooks data
+                                                </span>
+
+                                            </div>
+
+                                        </div>
+
+                                    </td>
+
+
+                                    <!-- STATUS -->
+
+                                    <td>
+
+                                        <span class="oya-sync-status-badge
+                                            @(isRunning
+                                                ? "oya-sync-status-running"
+                                                : isFailed
+                                                    ? "oya-sync-status-error"
+                                                    : "oya-sync-status-active")"
+                                              data-status>
+
+                                            <span class="oya-sync-status-dot"></span>
+
+                                            <span class="status-text">
+                                                @statusText
+                                            </span>
+
+                                        </span>
+
+                                    </td>
+
+
+                                    <!-- SYNC STATUS -->
+
+                                    <td>
+
+                                        <div class="oya-sync-result
+                                            @(isRunning
+                                                ? "sync-running"
+                                                : isSuccess
+                                                    ? "sync-complete"
+                                                    : isFailed
+                                                        ? "sync-failed"
+                                                        : "")"
+                                             data-sync-result>
+
+                                            <span class="oya-sync-result-icon
+                                                @(isRunning ? "oya-spin" : "")"
+                                                  data-result-icon>
+
+                                                @resultIcon
+
+                                            </span>
+
+
+                                            <div>
+
+                                                <strong data-result-title>
+
+                                                    @if (isRunning)
+                                                    {
+                                                        <text>Syncing...</text>
+                                                    }
+                                                    else if (isSuccess)
+                                                    {
+                                                        <text>Success</text>
+                                                    }
+                                                    else if (isFailed)
+                                                    {
+                                                        <text>Failed</text>
+                                                    }
+                                                    else
+                                                    {
+                                                        <text>Pending</text>
+                                                    }
+
+                                                </strong>
+
+
+                                                <span class="oya-sync-records"
+                                                      data-result-message>
+
+                                                    @description
+
+                                                </span>
+
+                                            </div>
+
+                                        </div>
+
+                                    </td>
+
+
+                                    <!-- LAST SYNCED -->
+
+                                    <td>
+
+                                        <span class="oya-sync-last"
+                                              data-last-synced>
+
+                                            @FormatLastSynced(item.LastSyncedOn)
+
+                                        </span>
+
+                                    </td>
+
+
+                                    <!-- DESCRIPTION -->
+
+                                    <td>
+
+                                        <span class="oya-sync-description"
+                                              data-description>
+
+                                            @description
+
+                                        </span>
+
+                                    </td>
+
+                                </tr>
+
+                                index++;
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+
+                                <td colspan="6">
+
+                                    <div class="oya-sync-empty">
+
+                                        <div class="oya-sync-empty-icon">
+                                            ↻
+                                        </div>
+
+                                        <strong>
+                                            No synchronization records
+                                        </strong>
+
+                                        <span>
+                                            There are currently no sync details available.
+                                        </span>
+
+                                    </div>
+
+                                </td>
+
+                            </tr>
+                        }
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+
+            <!-- =================================================
+                 AUTOMATIC SYNC INFORMATION
+                 ================================================= -->
+
+            <div class="oya-sync-info">
+
+                <div class="oya-sync-info-icon">
+                    i
+                </div>
+
+                <div>
+
+                    <strong>
+                        Automatic synchronization
+                    </strong>
+
+                    <span id="automaticSyncMessage">
+                        QuickBooks synchronization is handled by the
+                        background sync service every 10 minute.
+                        This page displays the latest database status.
+                    </span>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     SYNC JAVASCRIPT
+     ========================================================= -->
+@section Scripts {
+
+    <script>
+
+        (() => {
+
+            // =====================================================
+            // SETTINGS
+            // =====================================================
+
+            const STATUS_POLL_INTERVAL = 2000;
+
+            const STATUS_URL =
+                '@Url.Action("Sync", "Home")';
+
+            const SYNC_NOW_URL =
+                '@Url.Action("SyncNow", "Home")';
+
+
+            // =====================================================
+            // STATE
+            // =====================================================
+
+            let syncRunning = false;
+            let manualPublishError = null;
+            let manualRun = null;
+
+            function activeRowVersions() {
+                return new Map(Array.from(
+                    document.querySelectorAll('#syncTable tbody tr[data-sync-active="true"]'),
+                    row => [row.getAttribute("data-sync-id"), row.getAttribute("data-sync-version")]
+                ));
+            }
+
+            function readTableVersion() {
+                return JSON.stringify(Array.from(
+                    document.querySelectorAll("#syncTable tbody tr[data-sync-index]"),
+                    row => [row.getAttribute("data-sync-index"),
+                            row.getAttribute("data-db-status"),
+                            row.getAttribute("data-sync-version")]
+                ));
+            }
+
+            function redirectIfSignedOut(response) {
+                if (response.status === 401 || response.redirected) {
+                    window.location.assign('@Url.Action("Login", "Authentication")' +
+                        '?ReturnUrl=' + encodeURIComponent(window.location.pathname));
+                    return true;
+                }
+                return false;
+            }
+
+            let statusPollTimer = null;
+
+            let requestInProgress = false;
+
+
+            // =====================================================
+            // ELEMENTS
+            // =====================================================
+
+            const startSyncButton =
+                document.getElementById("startSyncButton");
+
+            const startSyncText =
+                document.getElementById("startSyncText");
+
+            const startSyncIcon =
+                document.getElementById("startSyncIcon");
+
+            const syncStatusIcon =
+                document.getElementById("syncStatusIcon");
+
+            const syncStatusTitle =
+                document.getElementById("syncStatusTitle");
+
+            const syncStatusMessage =
+                document.getElementById("syncStatusMessage");
+
+            const liveSyncStatus =
+                document.getElementById("liveSyncStatus");
+
+            const topConnectionStatus =
+                document.getElementById("topConnectionStatus");
+
+            const summaryConnectionStatus =
+                document.getElementById("summaryConnectionStatus");
+
+            const quickBooksStatus =
+                document.getElementById("quickBooksStatus");
+
+            const syncElementCount =
+                document.getElementById("syncElementCount");
+
+            const syncTableBody =
+                document.getElementById("syncTableBody");
+
+
+            // =====================================================
+            // NORMALIZE STATUS
+            // =====================================================
+
+            function normalizeStatus(status) {
+
+                if (!status) {
+                    return "pending";
+                }
+
+                return status
+                    .toString()
+                    .trim()
+                    .toLowerCase();
+            }
+
+
+            // =====================================================
+            // BUTTON -> RUNNING
+            // =====================================================
+
+            function setButtonRunning() {
+
+                if (!startSyncButton) {
+                    return;
+                }
+
+                startSyncButton.disabled = true;
+
+                startSyncButton.classList.add(
+                    "sync-button-running"
+                );
+
+
+                if (startSyncText) {
+
+                    startSyncText.textContent =
+                        "Syncing...";
+
+                }
+
+
+                if (startSyncIcon) {
+
+                    startSyncIcon.classList.add(
+                        "oya-spin"
+                    );
+
+                }
+
+            }
+
+
+            // =====================================================
+            // BUTTON -> READY
+            // =====================================================
+
+            function resetButton() {
+
+                if (!startSyncButton) {
+                    return;
+                }
+
+                startSyncButton.disabled = false;
+
+                startSyncButton.classList.remove(
+                    "sync-button-running"
+                );
+
+
+                if (startSyncText) {
+
+                    startSyncText.textContent =
+                        "Start Sync Now";
+
+                }
+
+
+                if (startSyncIcon) {
+
+                    startSyncIcon.classList.remove(
+                        "oya-spin"
+                    );
+
+                }
+
+            }
+
+
+            // =====================================================
+            // PAGE -> RUNNING
+            // =====================================================
+
+            function setPageRunning(
+                runningCount,
+                successCount,
+                totalCount
+            ) {
+
+                syncRunning = true;
+
+                setButtonRunning();
+
+
+                if (syncStatusIcon) {
+
+                    syncStatusIcon.textContent =
+                        "↻";
+
+                    syncStatusIcon.classList.add(
+                        "sync-running"
+                    );
+
+                }
+
+
+                if (syncStatusTitle) {
+
+                    syncStatusTitle.textContent =
+                        "Synchronization Running";
+
+                }
+
+
+                if (syncStatusMessage) {
+
+                    syncStatusMessage.textContent =
+                        "QuickBooks synchronization is currently running.";
+
+                }
+
+
+                if (topConnectionStatus) {
+
+                    topConnectionStatus.textContent =
+                        "Syncing...";
+
+                }
+
+
+                if (summaryConnectionStatus) {
+
+                    summaryConnectionStatus.textContent =
+                        "Syncing";
+
+                }
+
+
+                if (quickBooksStatus) {
+
+                    quickBooksStatus.textContent =
+                        "Syncing...";
+
+                }
+
+
+                if (liveSyncStatus) {
+
+                    liveSyncStatus.innerHTML =
+
+                        '<span class="oya-live-dot running"></span>' +
+
+                        '<span>Sync running</span>' +
+
+                        '<span class="oya-refresh-text">' +
+
+                        runningCount +
+
+                        ' running • ' +
+
+                        successCount +
+
+                        '/' +
+
+                        totalCount +
+
+                        ' completed' +
+
+                        '</span>';
+
+                }
+
+            }
+
+
+            // =====================================================
+            // PAGE -> COMPLETED
+            // =====================================================
+
+            function setPageComplete(totalCount) {
+
+                syncRunning = false;
+
+                resetButton();
+
+
+                if (syncStatusIcon) {
+
+                    syncStatusIcon.textContent =
+                        "✓";
+
+                    syncStatusIcon.classList.remove(
+                        "sync-running"
+                    );
+
+                }
+
+
+                if (syncStatusTitle) {
+
+                    syncStatusTitle.textContent =
+                        "Synchronization Completed";
+
+                }
+
+
+                if (syncStatusMessage) {
+
+                    syncStatusMessage.textContent =
+                        "QuickBooks synchronization completed successfully.";
+
+                }
+
+
+                if (topConnectionStatus) {
+
+                    topConnectionStatus.textContent =
+                        "Connected";
+
+                }
+
+
+                if (summaryConnectionStatus) {
+
+                    summaryConnectionStatus.textContent =
+                        "Active";
+
+                }
+
+
+                if (quickBooksStatus) {
+
+                    quickBooksStatus.textContent =
+                        "Connected";
+
+                }
+
+
+                if (liveSyncStatus) {
+
+                    liveSyncStatus.innerHTML =
+
+                        '<span class="oya-live-dot"></span>' +
+
+                        '<span>Sync completed</span>' +
+
+                        '<span class="oya-refresh-text">' +
+
+                        totalCount +
+
+                        ' elements up to date' +
+
+                        '</span>';
+
+                }
+
+            }
+
+
+            // =====================================================
+            // PAGE -> FAILED
+            // =====================================================
+
+            function setPageFailed(failedCount) {
+
+                syncRunning = false;
+
+                resetButton();
+
+
+                if (syncStatusIcon) {
+
+                    syncStatusIcon.textContent =
+                        "!";
+
+                    syncStatusIcon.classList.remove(
+                        "sync-running"
+                    );
+
+                }
+
+
+                if (syncStatusTitle) {
+
+                    syncStatusTitle.textContent =
+                        "Synchronization Failed";
+
+                }
+
+
+                if (syncStatusMessage) {
+
+                    syncStatusMessage.textContent =
+                        failedCount +
+                        " synchronization element(s) failed.";
+
+                }
+
+
+                if (topConnectionStatus) {
+
+                    topConnectionStatus.textContent =
+                        "Connected";
+
+                }
+
+
+                if (summaryConnectionStatus) {
+
+                    summaryConnectionStatus.textContent =
+                        "Active";
+
+                }
+
+
+                if (quickBooksStatus) {
+
+                    quickBooksStatus.textContent =
+                        "Error";
+
+                }
+
+
+                if (liveSyncStatus) {
+
+                    liveSyncStatus.innerHTML =
+
+                        '<span class="oya-live-dot error"></span>' +
+
+                        '<span>Sync failed</span>' +
+
+                        '<span class="oya-refresh-text">' +
+
+                        'Check synchronization details' +
+
+                        '</span>';
+
+                }
+
+            }
+
+
+            // =====================================================
+            // UPDATE TABLE
+            // =====================================================
+
+            function updateTable(newDocument) {
+
+                if (!syncTableBody) {
+                    return;
+                }
+
+
+                const newBody =
+                    newDocument.querySelector(
+                        "#syncTableBody"
+                    );
+
+
+                if (newBody) {
+
+                    syncTableBody.innerHTML =
+                        newBody.innerHTML;
+
+                }
+
+
+                const newCount =
+                    newDocument.querySelector(
+                        "#syncElementCount"
+                    );
+
+
+                if (
+                    newCount &&
+                    syncElementCount
+                ) {
+
+                    syncElementCount.textContent =
+                        newCount.textContent.trim();
+
+                }
+
+            }
+
+
+            // =====================================================
+            // READ TABLE STATUS
+            // =====================================================
+
+            function readTableStatus(activeOnly = false) {
+
+                const rows =
+                    document.querySelectorAll(
+                        activeOnly
+                            ? '#syncTable tbody tr[data-sync-active="true"]'
+                            : "#syncTable tbody tr[data-sync-index]"
+                    );
+
+
+                let running = 0;
+
+                let success = 0;
+
+                let failed = 0;
+
+                let pending = 0;
+
+
+                rows.forEach(row => {
+
+                    const status =
+                        normalizeStatus(
+                            row.getAttribute(
+                                "data-db-status"
+                            )
+                        );
+
+
+                    if (status === "running") {
+
+                        running++;
+
+                    }
+                    else if (status === "success") {
+
+                        success++;
+
+                    }
+                    else if (
+                        status === "failed" ||
+                        status === "error"
+                    ) {
+
+                        failed++;
+
+                    }
+                    else {
+
+                        pending++;
+
+                    }
+
+                });
+
+
+                return {
+
+                    total: rows.length,
+
+                    running: running,
+
+                    success: success,
+
+                    failed: failed,
+
+                    pending: pending
+
+                };
+
+            }
+
+
+            // =====================================================
+            // REFRESH FROM DATABASE
+            // =====================================================
+
+            async function refreshSyncStatus() {
+
+                if (requestInProgress) {
+                    return;
+                }
+
+
+                requestInProgress = true;
+
+
+                try {
+
+                    const response =
+                        await fetch(
+                            STATUS_URL,
+                            {
+                                method: "GET",
+
+                                cache: "no-store",
+
+                                headers: {
+                                    "X-Requested-With":
+                                        "XMLHttpRequest"
+                                }
+                            }
+                        );
+
+
+                    if (redirectIfSignedOut(response)) {
+                        return;
+                    }
+
+                    if (!response.ok) {
+
+                        throw new Error(
+                            "HTTP " +
+                            response.status
+                        );
+
+                    }
+
+
+                    const html =
+                        await response.text();
+
+
+                    const parser =
+                        new DOMParser();
+
+
+                    const newDocument =
+                        parser.parseFromString(
+                            html,
+                            "text/html"
+                        );
+
+
+                    /*
+                     * Replace the table with the
+                     * latest database values.
+                     */
+
+                    updateTable(
+                        newDocument
+                    );
+
+
+                    /*
+                     * Read the NEW table.
+                     */
+
+                    const status =
+                        readTableStatus(manualRun !== null);
+
+                    // A successful publish is not a completed QuickBooks run. Each active
+                    // element must have a new database timestamp before this request ends.
+                    if (manualRun) {
+                        const currentVersions = activeRowVersions();
+                        const refreshed = Array.from(manualRun.baseline).filter(
+                            ([id, version]) => currentVersions.has(id) && currentVersions.get(id) !== version
+                        ).length;
+
+                        if (refreshed < manualRun.baseline.size || status.running > 0) {
+                            if (refreshed === 0 && Date.now() - manualRun.requestedAt > 60000) {
+                                manualRun = null;
+                                setPageFailed(1);
+                                const message = "The backend did not start a new sync within 60 seconds. Check that the sync runner is connected, then retry.";
+                                syncStatusMessage.textContent = message;
+                                manualPublishError = { message, version: readTableVersion() };
+                                return;
+                            }
+                            setPageRunning(status.running, 0, manualRun.baseline.size);
+                            if (refreshed === 0 && status.running === 0) {
+                                syncStatusTitle.textContent = "Waiting for sync runner";
+                                syncStatusMessage.textContent = manualRun.accepted
+                                    ? "Command sent. Waiting for the backend to start a new sync."
+                                    : "Sending the sync command...";
+                            } else {
+                                syncStatusMessage.textContent = "Waiting for all active elements to finish this sync.";
+                            }
+                            return;
+                        }
+                        manualRun = null;
+                    }
+
+                    // Preserve a start error only while the database is unchanged.
+                    if (manualPublishError) {
+                        if (manualPublishError.version === readTableVersion()) {
+                            return;
+                        }
+                        manualPublishError = null;
+                    }
+
+
+                    console.log(
+                        "[SYNC UI]",
+                        status
+                    );
+
+
+                    // =================================================
+                    // RUNNING: unfinished rows may still contain previous errors.
+                    // =================================================
+
+                    if (status.running > 0) {
+
+                        setPageRunning(
+                            status.running,
+                            status.success,
+                            status.total
+                        );
+
+                    }
+
+
+                    // =================================================
+                    // FAILED
+                    // =================================================
+
+                    else if (status.failed > 0) {
+
+                        setPageFailed(
+                            status.failed
+                        );
+
+                    }
+
+
+                    // =================================================
+                    // ALL SUCCESS
+                    // =================================================
+
+                    else if (
+                        status.total > 0 &&
+                        status.success === status.total
+                    ) {
+
+                        setPageComplete(
+                            status.total
+                        );
+
+                    }
+
+
+                    // =================================================
+                    // PENDING
+                    // =================================================
+
+                    else {
+
+                        if (!syncRunning) {
+
+                            if (liveSyncStatus) {
+
+                                liveSyncStatus.innerHTML =
+
+                                    '<span class="oya-live-dot"></span>' +
+
+                                    '<span>Live status</span>' +
+
+                                    '<span class="oya-refresh-text">' +
+
+                                    'Checking database...' +
+
+                                    '</span>';
+
+                            }
+
+                        }
+
+                    }
+
+                }
+                catch (error) {
+
+                    console.error(
+                        "[SYNC UI] Status refresh failed:",
+                        error
+                    );
+
+                }
+                finally {
+
+                    requestInProgress = false;
+
+                }
+
+            }
+
+
+            // =====================================================
+            // START CONTINUOUS STATUS MONITORING
+            // =====================================================
+
+            function startStatusMonitoring() {
+
+                /*
+                 * Immediately check.
+                 */
+
+                refreshSyncStatus();
+
+
+                /*
+                 * Then continuously check every 2 seconds.
+                 *
+                 * This is important because automatic
+                 * QuickBooks sync happens independently
+                 * of the browser.
+                 */
+
+                statusPollTimer =
+                    setInterval(
+                        refreshSyncStatus,
+                        STATUS_POLL_INTERVAL
+                    );
+
+            }
+
+
+            // =====================================================
+            // MANUAL SYNC
+            // =====================================================
+
+            async function startSync() {
+
+                if (syncRunning) {
+
+                    console.log(
+                        "[SYNC UI] Sync already running."
+                    );
+
+                    return;
+
+                }
+
+
+                manualPublishError = null;
+                const baseline = activeRowVersions();
+                if (baseline.size === 0) {
+                    setPageFailed(1);
+                    syncStatusMessage.textContent = "No active synchronization elements are configured.";
+                    return;
+                }
+                manualRun = { baseline, requestedAt: Date.now(), accepted: false };
+                syncRunning = true;
+
+                setPageRunning(
+                    0,
+                    0,
+                    baseline.size
+                );
+
+
+                console.log(
+                    "[SYNC UI] Sending manual sync request..."
+                );
+
+
+                try {
+
+                    const response =
+                        await fetch(
+                            SYNC_NOW_URL,
+                            {
+                                method: "GET",
+
+                                cache: "no-store",
+
+                                headers: {
+                                    "X-Requested-With":
+                                        "XMLHttpRequest"
+                                }
+                            }
+                        );
+
+
+                    if (redirectIfSignedOut(response)) {
+                        return;
+                    }
+
+                    const result = await response.json();
+
+                    if (!response.ok || result.success !== true) {
+
+                        throw new Error(
+                            result.error || result.message || ("SyncNow HTTP " + response.status)
+                        );
+
+                    }
+
+
+                    console.log(
+                        "[SYNC UI] Manual sync request sent."
+                    );
+                    if (manualRun) manualRun.accepted = true;
+
+
+                    /*
+                     * DO NOT fake progress.
+                     *
+                     * The continuous monitor will now
+                     * detect Running/Success/Failed from
+                     * the actual SyncStatus database.
+                     */
+
+                    refreshSyncStatus();
+
+                }
+                catch (error) {
+
+                    manualRun = null;
+
+                    console.error(
+                        "[SYNC UI] Manual sync failed:",
+                        error
+                    );
+
+
+                    setPageFailed(1);
+
+                    manualPublishError = { message: error.message, version: readTableVersion() };
+                    if (syncStatusMessage) {
+                        syncStatusMessage.textContent = error.message;
+                    }
+
+                }
+
+            }
+
+
+            // =====================================================
+            // BUTTON CLICK
+            // =====================================================
+
+            if (startSyncButton) {
+
+                startSyncButton.addEventListener(
+                    "click",
+                    function(event) {
+
+                        event.preventDefault();
+
+
+                        if (syncRunning) {
+
+                            console.log(
+                                "[SYNC UI] Sync already running."
+                            );
+
+                            return;
+
+                        }
+
+
+                        startSync();
+
+                    }
+                );
+
+            }
+
+
+            // =====================================================
+            // START
+            // =====================================================
+
+            console.log(
+                "[SYNC UI] Sync status monitoring started."
+            );
+
+
+            startStatusMonitoring();
+
+
+            // =====================================================
+            // CLEANUP
+            // =====================================================
+
+            window.addEventListener(
+                "beforeunload",
+                function() {
+
+                    if (statusPollTimer) {
+
+                        clearInterval(
+                            statusPollTimer
+                        );
+
+                        statusPollTimer = null;
+
+                    }
+
+                }
+            );
+
+        })();
+
+    </script>
+
+}

@@ -1,0 +1,516 @@
+﻿@model OYA_Web_Application.Models.DatabaseEntryModel
+
+@{
+    ViewData["Title"] = "Add Distributor";
+}
+
+<link rel="stylesheet"
+      href="~/assets/css/database-entry.css"
+      asp-append-version="true" />
+
+<div class="distributor-form-page">
+
+    <div class="distributor-form-card">
+
+        <!-- HEADER -->
+        <div class="form-title">
+            <div>
+                <h2>Add Distributor</h2>
+                <p>Enter the distributor information below.</p>
+            </div>
+
+            <a asp-controller="DatabaseEntry"
+               asp-action="Index"
+               class="back-btn">
+                ← Back
+            </a>
+        </div>
+
+
+        <!-- SERVER ERROR -->
+        @if (!string.IsNullOrWhiteSpace(ViewBag.Error))
+        {
+            <div class="form-error">
+                <strong>Error:</strong>
+                @ViewBag.Error
+            </div>
+        }
+
+
+        <!-- VALIDATION ERROR -->
+        @if (!ViewData.ModelState.IsValid)
+        {
+            <div class="form-error">
+                Please correct the highlighted fields before saving the distributor.
+            </div>
+        }
+
+
+        <!-- FORM -->
+        <form asp-controller="DatabaseEntry"
+              asp-action="Create"
+              method="post"
+              autocomplete="off">
+
+            @Html.AntiForgeryToken()
+
+
+            <!-- =====================================================
+                 BASIC INFORMATION
+                 ===================================================== -->
+
+            <div class="form-section">
+
+                <h3 class="form-section-title">
+                    Basic Information
+                </h3>
+
+                <div class="form-grid">
+
+                    <!-- CUSTOMER -->
+                    <div class="form-group">
+
+                        <label for="Customer">
+                            Customer
+                        </label>
+
+                        <input type="text"
+                               id="Customer"
+                               name="Customer"
+                               value="@Model?.Customer"
+                               placeholder="Customer"
+                               class="form-control" />
+
+                        @if (ViewData.ModelState["Customer"]?.Errors.Count > 0)
+                        {
+                            <span class="field-validation-error">
+                                @ViewData.ModelState["Customer"]?.Errors.FirstOrDefault()?.ErrorMessage
+                            </span>
+                        }
+
+                    </div>
+
+
+                    <!-- NAME -->
+                    <div class="form-group">
+
+                        <label for="Name">
+                            Name
+                        </label>
+
+                        <input type="text"
+                               id="Name"
+                               name="Name"
+                               value="@Model?.Name"
+                               placeholder="Distributor name"
+                               class="form-control" />
+
+                        @if (ViewData.ModelState["Name"]?.Errors.Count > 0)
+                        {
+                            <span class="field-validation-error">
+                                @ViewData.ModelState["Name"]?.Errors.FirstOrDefault()?.ErrorMessage
+                            </span>
+                        }
+
+                    </div>
+
+
+                    <!-- SHEET -->
+                    <div class="form-group">
+
+                        <label for="Sheet">
+                            Sheet
+                        </label>
+
+                        <input type="text"
+                               id="Sheet"
+                               name="Sheet"
+                               value="@Model?.Sheet"
+                               placeholder="Sheet"
+                               class="form-control" />
+
+                        @if (ViewData.ModelState["Sheet"]?.Errors.Count > 0)
+                        {
+                            <span class="field-validation-error">
+                                @ViewData.ModelState["Sheet"]?.Errors.FirstOrDefault()?.ErrorMessage
+                            </span>
+                        }
+
+                    </div>
+
+
+                    <!-- CODE -->
+                    <div class="form-group">
+
+                        <label for="Code">
+                            Code
+                        </label>
+
+                        <input type="text"
+                               id="Code"
+                               name="Code"
+                               value="@Model?.Code"
+                               placeholder="Code"
+                               class="form-control" />
+
+                        @if (ViewData.ModelState["Code"]?.Errors.Count > 0)
+                        {
+                            <span class="field-validation-error">
+                                @ViewData.ModelState["Code"]?.Errors.FirstOrDefault()?.ErrorMessage
+                            </span>
+                        }
+
+                    </div>
+
+
+                    <!-- REGION -->
+                    <div class="form-group">
+
+                        <label for="Region">
+                            Region
+                        </label>
+
+                        <input type="text"
+                               id="Region"
+                               name="Region"
+                               value="@Model?.Region"
+                               placeholder="Region"
+                               class="form-control" />
+
+                    </div>
+
+
+                    <!-- TERRITORY -->
+                    <div class="form-group">
+
+                        <label for="Territory">
+                            Territory
+                        </label>
+
+                        <input type="text"
+                               id="Territory"
+                               name="Territory"
+                               value="@Model?.Territory"
+                               placeholder="Territory"
+                               class="form-control" />
+
+                    </div>
+
+
+                    <!-- HQ -->
+                    <div class="form-group">
+
+                        <label for="HQ">
+                            HQ
+                        </label>
+
+                        <input type="text"
+                               id="HQ"
+                               name="HQ"
+                               value="@Model?.HQ"
+                               placeholder="HQ"
+                               class="form-control" />
+
+                    </div>
+
+
+                    <!-- ROW -->
+                    <div class="form-group">
+
+                        <label for="Row">
+                            Row
+                        </label>
+
+                        <input type="number"
+                               step="any"
+                               id="Row"
+                               name="Row"
+                               value="@Model?.Row"
+                               placeholder="Row"
+                               class="form-control" />
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =====================================================
+                 DISTRIBUTOR DETAILS
+                 ===================================================== -->
+
+            <div class="form-section">
+
+                <h3 class="form-section-title">
+                    Distributor Details
+                </h3>
+
+                <div class="form-grid">
+
+                    <!-- START -->
+                    <div class="form-group">
+
+                        <label for="Start">
+                            Start
+                        </label>
+
+                        <input type="number"
+                               step="any"
+                               id="Start"
+                               name="Start"
+                               value="@Model?.Start"
+                               placeholder="Start"
+                               class="form-control" />
+
+                    </div>
+
+
+                    <!-- TERR -->
+                    <div class="form-group">
+
+                        <label for="Terr">
+                            Terr
+                        </label>
+
+                        <input type="number"
+                               step="any"
+                               id="Terr"
+                               name="Terr"
+                               value="@Model?.Terr"
+                               placeholder="Terr"
+                               class="form-control" />
+
+                    </div>
+
+
+                    <!-- DSC -->
+                    <div class="form-group">
+
+                        <label for="Dsc">
+                            Dsc
+                        </label>
+
+                        <input type="number"
+                               step="any"
+                               id="Dsc"
+                               name="Dsc"
+                               value="@Model?.Dsc"
+                               placeholder="Dsc"
+                               class="form-control" />
+
+                    </div>
+
+
+                    <!-- STORE -->
+                    <div class="form-group">
+
+                        <label for="Store">
+                            Store
+                        </label>
+
+                        <input type="number"
+                               step="any"
+                               id="Store"
+                               name="Store"
+                               value="@Model?.Store"
+                               placeholder="Store"
+                               class="form-control" />
+
+                    </div>
+
+
+                    <!-- DE -->
+                    <div class="form-group">
+
+                        <label for="De">
+                            De
+                        </label>
+
+                        <input type="number"
+                               step="any"
+                               id="De"
+                               name="De"
+                               value="@Model?.De"
+                               placeholder="De"
+                               class="form-control" />
+
+                    </div>
+
+
+                    <!-- PREVIOUS YEAR TOTAL -->
+                    <div class="form-group">
+
+                        <label for="PrevYearTotal">
+                            Previous Year Total
+                        </label>
+
+                        <input type="number"
+                               step="any"
+                               id="PrevYearTotal"
+                               name="PrevYearTotal"
+                               value="@Model?.PrevYearTotal"
+                               placeholder="Previous Year Total"
+                               class="form-control" />
+
+                    </div>
+
+
+                    <!-- PLAN -->
+                    <div class="form-group">
+
+                        <label for="Plan">
+                            Plan
+                        </label>
+
+                        <input type="number"
+                               step="any"
+                               id="Plan"
+                               name="Plan"
+                               value="@Model?.Plan"
+                               placeholder="Plan"
+                               class="form-control" />
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =====================================================
+                 REGION ROWS
+                 ===================================================== -->
+
+            <div class="form-section">
+
+                <h3 class="form-section-title">
+                    Region Rows
+                </h3>
+
+                <div class="form-grid">
+
+                    <!-- INTERNATIONAL ROW -->
+                    <div class="form-group">
+
+                        <label for="InternationalRow">
+                            International Row
+                        </label>
+
+                        <input type="number"
+                               id="InternationalRow"
+                               name="InternationalRow"
+                               value="@Model?.InternationalRow"
+                               placeholder="International Row"
+                               class="form-control" />
+
+                    </div>
+
+
+                    <!-- WEST ROW -->
+                    <div class="form-group">
+
+                        <label for="WestRow">
+                            West Row
+                        </label>
+
+                        <input type="number"
+                               id="WestRow"
+                               name="WestRow"
+                               value="@Model?.WestRow"
+                               placeholder="West Row"
+                               class="form-control" />
+
+                    </div>
+
+
+                    <!-- EAST ROW -->
+                    <div class="form-group">
+
+                        <label for="EastRow">
+                            East Row
+                        </label>
+
+                        <input type="number"
+                               id="EastRow"
+                               name="EastRow"
+                               value="@Model?.EastRow"
+                               placeholder="East Row"
+                               class="form-control" />
+
+                    </div>
+
+
+                    <!-- CENTRAL ROW -->
+                    <div class="form-group">
+
+                        <label for="CentralRow">
+                            Central Row
+                        </label>
+
+                        <input type="number"
+                               id="CentralRow"
+                               name="CentralRow"
+                               value="@Model?.CentralRow"
+                               placeholder="Central Row"
+                               class="form-control" />
+
+                    </div>
+
+                </div>
+
+
+                <!-- =================================================
+                     ACTIVE
+                     ================================================= -->
+
+                <div class="active-checkbox">
+
+                    <div class="active-checkbox-row">
+
+                        <input asp-for="IsActive"
+                               type="checkbox"
+                               id="IsActive"
+                               class="checkbox-input" />
+
+                        <label for="IsActive">
+                            Active Distributor
+                        </label>
+
+                    </div>
+
+                    <p class="active-help-text">
+                        Checked = Active
+                        <span>|</span>
+                        Unchecked = Inactive
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- =====================================================
+                 ACTIONS
+                 ===================================================== -->
+
+            <div class="form-actions">
+
+                <a asp-controller="DatabaseEntry"
+                   asp-action="Index"
+                   class="cancel-btn">
+                    Cancel
+                </a>
+
+                <button type="submit"
+                        class="save-btn">
+                    Save Distributor
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>

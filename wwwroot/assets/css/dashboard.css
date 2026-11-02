@@ -1,0 +1,1312 @@
+﻿/* =========================================================
+   OYA DASHBOARD
+   CLEAN WHITE / MINIMAL DESIGN
+   ========================================================= */
+
+
+/* =========================================================
+   ROOT VARIABLES
+   ========================================================= */
+
+:root {
+    --oya-sidebar-width: 224px;
+    /* PAGE */
+    --oya-page-bg: #f7f8fa;
+    --oya-card-bg: #ffffff;
+    /* SIDEBAR */
+    --oya-sidebar-bg: #08090c;
+    --oya-sidebar-border: #1b1d22;
+    /* COLORS */
+    --oya-primary: #e91e8f;
+    --oya-primary-dark: #c91679;
+    /* TEXT */
+    --oya-text: #111827;
+    --oya-heading: #101828;
+    --oya-muted: #7b8494;
+    --oya-light-text: #98a2b3;
+    /* BORDERS */
+    --oya-border: #e6e9ee;
+    --oya-soft-border: #edf0f4;
+    /* SHADOW */
+    --oya-shadow: 0 4px 18px rgba(16, 24, 40, 0.045);
+    --oya-shadow-hover: 0 10px 28px rgba(16, 24, 40, 0.08);
+}
+
+
+/* =========================================================
+   GLOBAL RESET
+   ========================================================= */
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+    background: var(--oya-page-bg) !important;
+}
+
+body {
+    color: var(--oya-text);
+}
+
+
+/*
+   IMPORTANT:
+   Prevent theme classes or parent containers
+   from adding a pink background.
+*/
+
+html,
+body,
+#root,
+#app,
+.oya-main,
+.oya-dashboard {
+    background-color: var(--oya-page-bg) !important;
+    background-image: none !important;
+}
+
+
+/* =========================================================
+   SIDEBAR
+   ========================================================= */
+
+.oya-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: var(--oya-sidebar-width);
+    display: flex;
+    flex-direction: column;
+    background: var(--oya-sidebar-bg) !important;
+    border-right: 1px solid var(--oya-sidebar-border);
+    z-index: 1000;
+    box-sizing: border-box;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+
+/* =========================================================
+   SIDEBAR BRAND
+   ========================================================= */
+
+.oya-sidebar-brand {
+    height: 76px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0 18px;
+    background: #08090c;
+    border-bottom: 1px solid #1b1d22;
+    flex-shrink: 0;
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   LOGO
+   ========================================================= */
+
+.oya-logo-mark {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 40px;
+    border-radius: 11px;
+    background: linear-gradient( 135deg, #ff1493, #e9007e );
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: 800;
+    box-shadow: 0 6px 18px rgba(255, 20, 147, 0.28);
+}
+
+
+.oya-logo-text {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    line-height: 1.15;
+}
+
+
+    .oya-logo-text strong {
+        color: #ffffff !important;
+        font-size: 14px;
+        font-weight: 800;
+    }
+
+
+    .oya-logo-text span {
+        margin-top: 4px;
+        color: #737985 !important;
+        font-size: 9px;
+        font-weight: 500;
+    }
+
+
+/* =========================================================
+   SIDEBAR NAVIGATION
+   ========================================================= */
+
+.oya-sidebar-nav {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 22px 10px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   NAV SECTION
+   ========================================================= */
+
+.oya-nav-section {
+    display: none;
+}
+
+
+/* =========================================================
+   NAV ITEM
+   ========================================================= */
+
+.oya-nav-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    width: 100%;
+    min-height: 42px;
+    padding: 0 12px;
+    margin: 2px 0;
+    border-radius: 9px;
+    color: #aeb3bd !important;
+    background: transparent;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 600;
+    box-sizing: border-box;
+    transition: background 0.18s ease, color 0.18s ease, transform 0.18s ease;
+}
+
+
+    /* =========================================================
+   NAV HOVER
+   ========================================================= */
+
+    .oya-nav-item:hover {
+        color: #ffffff !important;
+        background: #14161b;
+        text-decoration: none;
+        transform: translateX(1px);
+    }
+
+
+    /* =========================================================
+   ACTIVE NAV
+   ========================================================= */
+
+    .oya-nav-item.active {
+        color: #ffffff !important;
+        background: rgba(233, 30, 143, 0.12);
+        font-weight: 700;
+    }
+
+
+        /* =========================================================
+   ACTIVE INDICATOR
+   ========================================================= */
+
+        .oya-nav-item.active::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 7px;
+            bottom: 7px;
+            width: 3px;
+            border-radius: 0 4px 4px 0;
+            background: var(--oya-primary);
+        }
+
+
+    /* =========================================================
+   NAV TEXT
+   ========================================================= */
+
+    .oya-nav-item > span:not(.oya-nav-icon) {
+        color: inherit !important;
+    }
+
+
+/* =========================================================
+   NAV ICON
+   ========================================================= */
+
+.oya-nav-icon {
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 28px;
+    border-radius: 8px;
+    background: #15171d;
+    color: #858b96 !important;
+    font-size: 13px;
+    transition: background 0.18s ease, color 0.18s ease;
+}
+
+
+/* Hover icon */
+
+.oya-nav-item:hover .oya-nav-icon {
+    background: #20232a;
+    color: #ffffff !important;
+}
+
+
+/* Active icon */
+
+.oya-nav-item.active .oya-nav-icon {
+    background: #ffffff;
+    color: var(--oya-primary) !important;
+}
+
+
+/* =========================================================
+   SIDEBAR BOTTOM
+   ========================================================= */
+
+.oya-sidebar-bottom {
+    flex-shrink: 0;
+    padding: 14px 10px 14px;
+    background: #08090c;
+    border-top: 1px solid #1b1d22;
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   USER CARD
+   ========================================================= */
+
+.oya-user-card {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px;
+    background: #0e1014 !important;
+    border: 1px solid #25272d;
+    border-radius: 11px;
+    box-sizing: border-box;
+}
+
+
+.oya-user-avatar {
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 34px;
+    border-radius: 9px;
+    background: linear-gradient( 135deg, #ff1493, #e9007e );
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 800;
+    box-shadow: 0 5px 15px rgba(255, 20, 147, 0.20);
+}
+
+
+.oya-user-info {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+
+    .oya-user-info strong {
+        overflow: hidden;
+        color: #ffffff !important;
+        font-size: 10px;
+        font-weight: 700;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+
+    .oya-user-info span {
+        margin-top: 3px;
+        color: #737985 !important;
+        font-size: 8px;
+        white-space: nowrap;
+    }
+
+
+/* =========================================================
+   LOGOUT
+   ========================================================= */
+
+.oya-logout {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    min-height: 34px;
+    margin-top: 8px;
+    border: 1px solid #25272d;
+    border-radius: 8px;
+    background: #ffffff;
+    color: #777b84 !important;
+    text-decoration: none;
+    font-size: 10px;
+    font-weight: 600;
+    transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+}
+
+
+    .oya-logout:hover {
+        background: #f1f2f4;
+        border-color: #dfe2e7;
+        color: #22252b !important;
+        text-decoration: none;
+    }
+
+
+.oya-logout-icon {
+    color: inherit;
+}
+
+
+/* =========================================================
+   MAIN CONTENT
+   ========================================================= */
+
+.oya-main {
+    min-height: 100vh;
+    margin-left: var(--oya-sidebar-width);
+    background: var(--oya-page-bg) !important;
+    background-image: none !important;
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   DASHBOARD
+   ========================================================= */
+
+.oya-dashboard {
+    min-height: 100vh;
+    padding: 28px;
+    background: var(--oya-page-bg) !important;
+    background-image: none !important;
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   DASHBOARD HEADER
+   ========================================================= */
+
+.oya-dashboard-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 24px;
+}
+
+
+.oya-dashboard-title {
+    margin: 0;
+    color: var(--oya-heading) !important;
+    font-size: 30px;
+    line-height: 1.2;
+    font-weight: 750;
+    letter-spacing: -0.7px;
+}
+
+
+.oya-dashboard-subtitle {
+    margin: 7px 0 0;
+    color: #7b8494 !important;
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   DATE
+   ========================================================= */
+
+.oya-dashboard-date {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    padding: 11px 16px;
+    background: #ffffff !important;
+    border: 1px solid var(--oya-border);
+    border-radius: 10px;
+    color: #667085 !important;
+    font-size: 13px;
+    font-weight: 600;
+    box-shadow: var(--oya-shadow);
+}
+
+
+/* =========================================================
+   KPI GRID
+   ========================================================= */
+
+.oya-kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+
+/* =========================================================
+   KPI CARD
+   ========================================================= */
+
+.oya-kpi-card {
+    position: relative;
+    min-height: 124px;
+    padding: 20px;
+    background: #ffffff !important;
+    border: 1px solid var(--oya-border);
+    border-radius: 13px;
+    box-shadow: var(--oya-shadow);
+    box-sizing: border-box;
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+
+    .oya-kpi-card:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--oya-shadow-hover);
+    }
+
+
+/* =========================================================
+   KPI TOP
+   ========================================================= */
+
+.oya-kpi-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+
+.oya-kpi-label {
+    color: #667085 !important;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   KPI ICON
+   ========================================================= */
+
+.oya-kpi-icon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 40px;
+    border-radius: 10px;
+    background: #fff0f7 !important;
+    color: var(--oya-primary) !important;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+
+.oya-kpi-card:nth-child(2) .oya-kpi-icon {
+    background: #eefaf5 !important;
+    color: #20a779 !important;
+}
+
+
+.oya-kpi-card:nth-child(3) .oya-kpi-icon {
+    background: #fff5e9 !important;
+    color: #e88a3d !important;
+}
+
+
+.oya-kpi-card:nth-child(4) .oya-kpi-icon {
+    background: #f3efff !important;
+    color: #7357d9 !important;
+}
+
+
+.oya-kpi-card:nth-child(5) .oya-kpi-icon {
+    background: #fff0f7 !important;
+    color: var(--oya-primary) !important;
+}
+
+
+/* =========================================================
+   KPI VALUE
+   ========================================================= */
+
+.oya-kpi-value {
+    margin-top: 15px;
+    color: #172b4d !important;
+    font-size: 24px;
+    line-height: 1.15;
+    font-weight: 750;
+    letter-spacing: -0.4px;
+}
+
+
+.oya-kpi-caption {
+    margin-top: 6px;
+    color: #98a2b3 !important;
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   DASHBOARD GRID
+   ========================================================= */
+
+.oya-dashboard-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.55fr) minmax(320px, 0.95fr);
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+
+/* =========================================================
+   PANELS
+   ========================================================= */
+
+.oya-panel {
+    overflow: hidden;
+    background: #ffffff !important;
+    border: 1px solid var(--oya-border);
+    border-radius: 14px;
+    box-shadow: var(--oya-shadow);
+    box-sizing: border-box;
+}
+
+
+.oya-panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    padding: 22px 24px 10px;
+}
+
+
+.oya-panel-title {
+    margin: 0;
+    color: #111827 !important;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+
+.oya-panel-subtitle {
+    margin: 5px 0 0;
+    color: #98a2b3 !important;
+    font-size: 11px;
+}
+
+
+.oya-panel-body {
+    padding: 8px 24px 22px;
+}
+
+
+/* =========================================================
+   CHART
+   ========================================================= */
+
+.oya-chart {
+    width: 100%;
+    min-height: 330px;
+}
+
+
+/* =========================================================
+   CUSTOMER LIST
+   ========================================================= */
+
+.oya-customer-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+
+.oya-customer-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    min-height: 46px;
+    padding: 0 9px;
+    border-bottom: 1px dashed #d9dee7;
+    box-sizing: border-box;
+    transition: background 0.18s ease, padding 0.18s ease;
+}
+
+
+    .oya-customer-row:last-child {
+        border-bottom: none;
+    }
+
+
+    .oya-customer-row:hover {
+        background: #fafbfc;
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+
+.oya-customer-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+}
+
+
+/* =========================================================
+   CUSTOMER AVATAR
+   ========================================================= */
+
+.oya-customer-avatar {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 32px;
+    border-radius: 8px;
+    background: #f4f5f7;
+    color: #667085;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   CUSTOMER NAME
+   ========================================================= */
+
+.oya-customer-name {
+    overflow: hidden;
+    color: #172b4d !important;
+    font-size: 13px;
+    font-weight: 600;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   CUSTOMER AMOUNT
+   ========================================================= */
+
+.oya-customer-amount {
+    flex-shrink: 0;
+    white-space: nowrap;
+    color: #172b4d !important;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   MONTHLY SALES CARDS
+   ========================================================= */
+
+.oya-monthly-sales-cards {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+    padding: 18px 20px 6px;
+}
+
+
+/* =========================================================
+   MONTHLY SALES CARD
+   ========================================================= */
+
+.oya-monthly-sales-card {
+    position: relative;
+    min-height: 82px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 14px 16px;
+    background: #ffffff !important;
+    border: 1px solid #e6e9ee;
+    border-radius: 11px;
+    box-sizing: border-box;
+    transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+
+
+    .oya-monthly-sales-card:hover {
+        transform: translateY(-2px);
+        border-color: #dfe3e8;
+        box-shadow: 0 7px 20px rgba(16, 24, 40, 0.06);
+    }
+
+
+/* =========================================================
+   MONTHLY CARD CONTENT
+   ========================================================= */
+
+.oya-monthly-sales-card-content {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.oya-monthly-sales-card-label {
+    color: #7b8494 !important;
+    font-size: 10px;
+    font-weight: 600;
+    line-height: 1.3;
+    margin-bottom: 4px;
+}
+
+
+.oya-monthly-sales-card-value {
+    color: #172b4d !important;
+    font-size: 22px;
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.4px;
+}
+
+
+.oya-monthly-sales-card-caption {
+    margin-top: 4px;
+    color: #98a2b3 !important;
+    font-size: 9px;
+    font-weight: 500;
+}
+
+
+/* =========================================================
+   MONTHLY CARD ICON
+   ========================================================= */
+
+.oya-monthly-sales-card-icon {
+    width: 36px;
+    height: 36px;
+    flex: 0 0 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9px;
+    background: #f6f7f9 !important;
+    color: #667085 !important;
+    font-size: 13px;
+    font-weight: 800;
+}
+
+
+/*
+   OYA card
+*/
+
+.oya-monthly-sales-card:nth-child(2)
+.oya-monthly-sales-card-icon {
+    background: #fff0f7 !important;
+    color: var(--oya-primary) !important;
+}
+
+
+/*
+   Pino card
+*/
+
+.oya-monthly-sales-card:nth-child(3)
+.oya-monthly-sales-card-icon {
+    background: #eefaf5 !important;
+    color: #20a779 !important;
+}
+
+
+/* =========================================================
+   MONTHLY CHART
+   ========================================================= */
+
+.oya-monthly-chart-body {
+    padding-top: 6px;
+}
+
+
+    .oya-monthly-chart-body .oya-chart {
+        width: 100%;
+    }
+
+
+/* =========================================================
+   DASHBOARD HEADER ACTIONS
+   ========================================================= */
+
+.oya-dashboard-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+
+/* =========================================================
+   SYNC BUTTON
+   ========================================================= */
+
+.oya-dashboard-sync-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    height: 42px;
+    padding: 0 18px;
+    border: 0;
+    border-radius: 9px;
+    background: var(--oya-primary);
+    color: #ffffff !important;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 5px 14px rgba(233, 30, 143, 0.18);
+    transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+
+    .oya-dashboard-sync-button:hover {
+        background: var(--oya-primary-dark);
+        transform: translateY(-1px);
+        box-shadow: 0 7px 18px rgba(233, 30, 143, 0.24);
+    }
+
+
+    .oya-dashboard-sync-button:active {
+        transform: translateY(0);
+    }
+
+
+    .oya-dashboard-sync-button span:first-child {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 15px;
+        line-height: 1;
+    }
+
+
+    .oya-dashboard-sync-button:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+        transform: none;
+        box-shadow: none;
+    }
+
+
+/* =========================================================
+   SYNC SPINNER
+   ========================================================= */
+
+.oya-dashboard-sync-spin {
+    animation: oyaDashboardSyncSpin 1s linear infinite;
+}
+
+
+@keyframes oyaDashboardSyncSpin {
+
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
+/* =========================================================
+   REMOVE PINK BACKGROUND FROM THEME
+   ========================================================= */
+
+/*
+   The previous theme rules were applying
+   pink shades to large areas of the dashboard.
+
+   Keep pink only as an accent.
+*/
+
+.oya-pink-theme,
+.oya-pink-theme .oya-main,
+.oya-pink-theme .oya-dashboard,
+.oya-pink-theme main,
+.oya-pink-theme .content,
+.oya-pink-theme .container,
+.oya-pink-theme .container-fluid {
+    background-color: var(--oya-page-bg) !important;
+    background-image: none !important;
+}
+
+
+    /* =========================================================
+   THEME PANEL OVERRIDES
+   ========================================================= */
+
+    .oya-pink-theme .oya-panel,
+    .oya-pink-theme .oya-kpi-card,
+    .oya-pink-theme .oya-monthly-sales-card,
+    .oya-pink-theme .oya-dashboard-date {
+        background: #ffffff !important;
+        background-image: none !important;
+        border-color: var(--oya-border);
+    }
+
+
+    /* =========================================================
+   PINK SHOULD ONLY BE ACCENT
+   ========================================================= */
+
+    .oya-pink-theme .oya-nav-item.active {
+        color: #ffffff !important;
+        background: rgba(233, 30, 143, 0.12) !important;
+    }
+
+
+        .oya-pink-theme .oya-nav-item.active::before {
+            background: var(--oya-primary) !important;
+        }
+
+
+        .oya-pink-theme .oya-nav-item.active .oya-nav-icon {
+            color: var(--oya-primary) !important;
+            background: #ffffff !important;
+        }
+
+
+/* =========================================================
+   CHART COLORS
+   ========================================================= */
+
+/*
+   These classes are useful if your chart
+   uses HTML/SVG legends.
+*/
+
+.oya-chart-oya,
+.oya-sales-oya {
+    color: var(--oya-primary);
+}
+
+
+.oya-chart-pino,
+.oya-sales-pino {
+    color: #20a779;
+}
+
+
+/* =========================================================
+   RESPONSIVE — 1400px
+   ========================================================= */
+
+@media (max-width: 1400px) {
+
+    .oya-kpi-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+
+/* =========================================================
+   RESPONSIVE — 1100px
+   ========================================================= */
+
+@media (max-width: 1100px) {
+
+    .oya-monthly-sales-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .oya-monthly-sales-card {
+        min-height: 78px;
+    }
+}
+
+
+/* =========================================================
+   RESPONSIVE — 992px
+   ========================================================= */
+
+@media (max-width: 992px) {
+
+    :root {
+        --oya-sidebar-width: 200px;
+    }
+
+
+    .oya-sidebar {
+        width: 200px;
+    }
+
+
+    .oya-main {
+        margin-left: 200px;
+    }
+
+
+    .oya-dashboard {
+        padding: 20px;
+    }
+
+
+    .oya-dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+
+
+    .oya-kpi-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+
+/* =========================================================
+   RESPONSIVE — 768px
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+    :root {
+        --oya-sidebar-width: 72px;
+    }
+
+
+    .oya-sidebar {
+        width: 72px;
+    }
+
+
+    .oya-main {
+        margin-left: 72px;
+    }
+
+
+    .oya-logo-text,
+    .oya-nav-section,
+    .oya-nav-item > span:not(.oya-nav-icon),
+    .oya-user-info,
+    .oya-logout span:not(.oya-logout-icon) {
+        display: none;
+    }
+
+
+    .oya-sidebar-brand {
+        justify-content: center;
+        padding: 0;
+    }
+
+
+    .oya-sidebar-nav {
+        padding: 18px 8px;
+    }
+
+
+    .oya-nav-item {
+        justify-content: center;
+        padding: 0;
+        gap: 0;
+    }
+
+
+        .oya-nav-item.active::before {
+            display: none;
+        }
+
+
+    .oya-nav-icon {
+        width: 36px;
+        height: 36px;
+        flex: 0 0 36px;
+    }
+
+
+    .oya-sidebar-bottom {
+        padding: 10px 8px;
+    }
+
+
+    .oya-user-card {
+        justify-content: center;
+        padding: 8px;
+    }
+
+
+    .oya-logout {
+        justify-content: center;
+        padding: 0;
+    }
+
+
+    .oya-dashboard-header {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 14px;
+    }
+
+
+    .oya-dashboard-header-actions {
+        width: 100%;
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+
+    .oya-dashboard-date {
+        justify-content: center;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+
+    .oya-dashboard-sync-button {
+        width: 100%;
+    }
+
+
+    .oya-kpi-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* =========================================================
+   RESPONSIVE — 576px
+   ========================================================= */
+
+@media (max-width: 576px) {
+
+    .oya-dashboard {
+        padding: 14px;
+    }
+
+
+    .oya-dashboard-title {
+        font-size: 24px;
+    }
+
+
+    .oya-dashboard-subtitle {
+        font-size: 12px;
+    }
+
+
+    .oya-kpi-card {
+        min-height: 115px;
+        padding: 17px;
+    }
+
+
+    .oya-kpi-value {
+        font-size: 22px;
+    }
+
+
+    .oya-panel-header {
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+
+
+    .oya-panel-body {
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+
+
+    .oya-monthly-sales-cards {
+        padding: 14px;
+    }
+
+
+    .oya-monthly-sales-card {
+        padding: 13px;
+    }
+
+
+    .oya-monthly-sales-card-value {
+        font-size: 20px;
+    }
+
+
+    .oya-customer-row {
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+
+
+    .oya-customer-name {
+        font-size: 12px;
+    }
+
+
+    .oya-customer-amount {
+        font-size: 12px;
+    }
+}
+
+
+/* =========================================================
+   FINAL SAFETY OVERRIDE
+   ========================================================= */
+
+/*
+   This is intentionally at the very bottom.
+   It ensures no large pink section appears
+   when scrolling below the dashboard.
+*/
+
+body,
+html,
+.oya-main,
+.oya-dashboard,
+.oya-dashboard-grid,
+.oya-panel,
+.oya-kpi-card {
+    background-image: none !important;
+}
+
+
+/*
+   Page background remains neutral.
+*/
+
+body,
+html,
+.oya-main,
+.oya-dashboard {
+    background-color: #f7f8fa !important;
+}

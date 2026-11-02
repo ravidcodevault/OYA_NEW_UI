@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8" />
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0" />
+
+    <title>
+        @ViewData["Title"] - OYA
+    </title>
+
+
+    <!-- =====================================================
+         METRONIC / MAIN CSS
+         ===================================================== -->
+
+    <link rel="stylesheet"
+          href="~/assets/css/style.bundle.css"
+          asp-append-version="true" />
+
+
+    <!-- =====================================================
+         PAGE SPECIFIC CSS
+         ===================================================== -->
+    @RenderSection("Styles", required: false)
+
+
+    <!-- =====================================================
+         OYA SIDEBAR CSS
+         MUST BE LAST
+         ===================================================== -->
+
+    <link rel="stylesheet"
+          href="~/assets/css/oya-sidebar.css"
+          asp-append-version="true" />
+
+</head>
+
+
+<body class="oya-body">
+
+    <!-- =====================================================
+         OYA SIDEBAR
+         ===================================================== -->
+
+    <aside class="oya-sidebar">
+
+
+        <!-- =================================================
+             BRAND
+             ================================================= -->
+
+        <div class="oya-sidebar-brand">
+
+            <!-- Actual OYA Logo -->
+            <div class="oya-logo-mark">
+
+                <img src="~/assets/media/logo/OYA_Logo.png"
+                     alt="OYA Logo" />
+
+            </div>
+
+
+            <!-- Brand Text -->
+            <div class="oya-logo-text">
+
+                <strong>
+                    OYA
+                </strong>
+
+                <span>
+                    Business Portal
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             NAVIGATION
+             ================================================= -->
+
+        <nav class="oya-sidebar-nav">
+
+
+            <!-- =================================================
+                 DASHBOARD
+                 ================================================= -->
+
+            <a href="@Url.Action("Dashboard", "Home")"
+               class="oya-nav-item @(ViewContext.RouteData.Values["action"]?.ToString() == "Dashboard" && ViewContext.RouteData.Values["controller"]?.ToString() == "Home" ? "active" : "")">
+
+                <span class="oya-nav-icon">
+                    ◈
+                </span>
+
+                <span class="oya-nav-label">
+                    Dashboard
+                </span>
+
+            </a>
+
+
+            <!-- =================================================
+                 REPORTS
+                 ================================================= -->
+
+            <a href="@Url.Action("Reports", "Home")"
+               class="oya-nav-item @(ViewContext.RouteData.Values["action"]?.ToString() == "Reports" && ViewContext.RouteData.Values["controller"]?.ToString() == "Home" ? "active" : "")">
+
+                <span class="oya-nav-icon">
+                    ▤
+                </span>
+
+                <span class="oya-nav-label">
+                    Reports
+                </span>
+
+            </a>
+
+
+            <!-- =================================================
+                 SYNC
+                 ================================================= -->
+
+            <a href="@Url.Action("Sync", "Home")"
+               class="oya-nav-item @(ViewContext.RouteData.Values["action"]?.ToString() == "Sync" && ViewContext.RouteData.Values["controller"]?.ToString() == "Home" ? "active" : "")">
+
+                <span class="oya-nav-icon">
+                    ↻
+                </span>
+
+                <span class="oya-nav-label">
+                    Sync
+                </span>
+
+            </a>
+
+
+        </nav>
+
+
+        <!-- =================================================
+             SIDEBAR BOTTOM
+             ================================================= -->
+
+        <div class="oya-sidebar-bottom">
+
+
+            <!-- =================================================
+                 USER
+                 ================================================= -->
+
+            <div class="oya-user-card">
+
+                <div class="oya-user-avatar">
+                    O
+                </div>
+
+                <div class="oya-user-info">
+
+                    <strong>
+                        OYA User
+                    </strong>
+
+                    <span>
+                        Administrator
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 LOGOUT
+                 ================================================= -->
+
+            <a href="@Url.Action("Logout", "Authentication")"
+               class="oya-logout">
+
+                <span class="oya-logout-icon">
+                    ↪
+                </span>
+
+                <span>
+                    Logout
+                </span>
+
+            </a>
+
+        </div>
+
+    </aside>
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+         ===================================================== -->
+
+    <main class="oya-main">
+
+        @RenderBody()
+
+    </main>
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+         ===================================================== -->
+
+    <script src="~/assets/js/scripts.bundle.js"
+            asp-append-version="true">
+    </script>
+
+    <script src="~/assets/js/widgets.bundle.js"
+            asp-append-version="true">
+    </script>
+
+
+    <!-- =====================================================
+         APEX CHARTS
+         ===================================================== -->
+
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+
+    <!-- =====================================================
+         PAGE SCRIPTS
+         ===================================================== -->
+    @RenderSection("Scripts", required: false)
+
+</body>
+
+</html>

@@ -1,0 +1,969 @@
+﻿@model OYA_Web_Application.Models.ViewModel.DashboardVM
+
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+@section Styles {
+    <link rel="stylesheet"
+          href="~/assets/css/dashboard.css"
+          asp-append-version="true" />
+
+    <style>
+        /* KPI icons: inline SVGs keep the icons visible even when
+                   Font Awesome / Keen Icons are not loaded. */
+        .oya-kpi-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            min-width: 40px;
+            border-radius: 11px;
+            box-sizing: border-box;
+        }
+
+            .oya-kpi-icon svg {
+                width: 20px;
+                height: 20px;
+                fill: none;
+                stroke: currentColor;
+                stroke-width: 1.8;
+                stroke-linecap: round;
+                stroke-linejoin: round;
+            }
+
+        .oya-kpi-icon-sales {
+            background: #fff0f7;
+            color: #ec087f;
+        }
+
+        .oya-kpi-icon-salon {
+            background: #eefaf6;
+            color: #20a879;
+        }
+
+        .oya-kpi-icon-pino {
+            background: #fff5e8;
+            color: #e39a35;
+        }
+
+        .oya-kpi-icon-public {
+            background: #f2efff;
+            color: #7664d8;
+        }
+
+        .oya-kpi-icon-foreign {
+            background: #fff0f7;
+            color: #ec087f;
+        }
+    </style>
+}
+
+<div class="oya-dashboard">
+
+    <!-- =====================================================
+         HEADER
+         ===================================================== -->
+
+    <div class="oya-dashboard-header">
+
+        <!-- LEFT -->
+        <div>
+            <h1 class="oya-dashboard-title">
+                OYA Dashboard
+            </h1>
+
+            <p class="oya-dashboard-subtitle">
+                Overview of your sales performance
+            </p>
+        </div>
+
+
+        <!-- RIGHT -->
+        <div class="oya-dashboard-header-actions">
+
+            <!-- DATE -->
+            <div class="oya-dashboard-date">
+
+                <i class="ki-outline ki-calendar-8"></i>
+
+                <span>
+                    @DateTime.Now.ToString("MMMM dd, yyyy")
+                </span>
+
+            </div>
+
+
+            <!-- SYNC BUTTON -->
+            <button type="button"
+                    id="dashboardStartSyncButton"
+                    class="oya-dashboard-sync-button">
+
+                <span id="dashboardSyncIcon"
+                      class="oya-dashboard-sync-icon">
+                    ↻
+                </span>
+
+                <span id="dashboardSyncText">
+                    Start Sync Now
+                </span>
+
+            </button>
+
+        </div>
+
+    </div>
+
+    @if (ViewBag.DashboardDataWarning is string dashboardDataWarning)
+    {
+        <div role="status" style="margin: 0 0 1rem; padding: .85rem 1rem; border: 1px solid #f1d28a; border-radius: 8px; background: #fff8e6; color: #634b12;">
+            @dashboardDataWarning
+        </div>
+    }
+
+    <!-- =====================================================
+         KPI CARDS
+         ===================================================== -->
+
+    <div class="oya-kpi-grid">
+
+        <!-- Total OYA -->
+        <div class="oya-kpi-card">
+            <div class="oya-kpi-top">
+                <span class="oya-kpi-label">Total OYA Sales</span>
+
+                <div class="oya-kpi-icon oya-kpi-icon-sales" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" role="img">
+                        <path d="M12 3v18M16.5 7.5c0-1.4-1.6-2.5-4.5-2.5s-4.5 1.1-4.5 3 1.3 2.6 4.5 3.2 4.5 1.5 4.5 3.3-1.6 3-4.5 3-4.5-1.2-4.5-3" />
+                    </svg>
+                </div>
+            </div>
+
+            <div class="oya-kpi-value">
+                $@Model.dashboardSales.TotalAmountOverallOya.ToString("N2")
+            </div>
+
+            <div class="oya-kpi-caption">Overall sales</div>
+        </div>
+
+
+        <!-- Salon -->
+        <div class="oya-kpi-card">
+            <div class="oya-kpi-top">
+                <span class="oya-kpi-label">Salons Direct</span>
+
+                <div class="oya-kpi-icon oya-kpi-icon-salon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" role="img">
+                        <path d="M8 3v7M16 3v7M5 7h14M7 10l-2 10M17 10l2 10M9 13h6M9 17h6" />
+                        <path d="M8 10c0 2.2 1.8 4 4 4s4-1.8 4-4" />
+                    </svg>
+                </div>
+            </div>
+
+            <div class="oya-kpi-value">
+                $@Model.dashboardSales.SalonSales.ToString("N2")
+            </div>
+
+            <div class="oya-kpi-caption">Salon sales</div>
+        </div>
+
+
+        <!-- Pino -->
+        <div class="oya-kpi-card">
+            <div class="oya-kpi-top">
+                <span class="oya-kpi-label">Pino Sales</span>
+
+                <div class="oya-kpi-icon oya-kpi-icon-pino" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" role="img">
+                        <path d="M5 18V9M9.5 18v-6M14 18V6M18.5 18v-9" />
+                        <path d="M4 18h16M5 7l4-3 4 2 5-4" />
+                        <path d="M15 2h3v3" />
+                    </svg>
+                </div>
+            </div>
+
+            <div class="oya-kpi-value">
+                $@Model.dashboardSales.Pino_This_Month_Sales.ToString("N2")
+            </div>
+
+            <div class="oya-kpi-caption">This month</div>
+        </div>
+
+
+        <!-- Public Direct -->
+        <div class="oya-kpi-card">
+            <div class="oya-kpi-top">
+                <span class="oya-kpi-label">Public Direct</span>
+
+                <div class="oya-kpi-icon oya-kpi-icon-public" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" role="img">
+                        <circle cx="12" cy="12" r="8.5" />
+                        <path d="M8.5 12h7M12 8.5v7" />
+                    </svg>
+                </div>
+            </div>
+
+            <div class="oya-kpi-value">
+                $@Model.dashboardSales.TotalAmountPublicDirect.ToString("N2")
+            </div>
+
+            <div class="oya-kpi-caption">Current total</div>
+        </div>
+
+
+        <!-- Foreign Business -->
+        <div class="oya-kpi-card">
+            <div class="oya-kpi-top">
+                <span class="oya-kpi-label">Foreign Business</span>
+
+                <div class="oya-kpi-icon oya-kpi-icon-foreign" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" role="img">
+                        <circle cx="12" cy="12" r="8.5" />
+                        <path d="M3.5 12h17M12 3.5c2.4 2.3 3.7 5.1 3.7 8.5S14.4 18.2 12 20.5M12 3.5C9.6 5.8 8.3 8.6 8.3 12s1.3 6.2 3.7 8.5" />
+                        <path d="M5.5 7.5h13M5.5 16.5h13" />
+                    </svg>
+                </div>
+            </div>
+
+            <div class="oya-kpi-value">
+                $@Model.dashboardSales.TotalAmountForeign.ToString("N2")
+            </div>
+
+            <div class="oya-kpi-caption">Current total</div>
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         MONTHLY SALES + TOP CUSTOMERS
+         ===================================================== -->
+
+    <div class="oya-dashboard-grid">
+
+        <!-- Monthly Sales -->
+        <div class="oya-panel">
+
+            <div class="oya-panel-header">
+
+                <div>
+                    <h2 class="oya-panel-title">
+                        Monthly Sales
+                    </h2>
+
+                    <p class="oya-panel-subtitle">
+                        OYA and Pino monthly performance
+                    </p>
+                </div>
+
+            </div>
+
+            <div class="oya-panel-body">
+
+                <div id="kt_charts_widget_jaffar"
+                     class="oya-chart">
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Top Customers -->
+        <div class="oya-panel">
+
+            <div class="oya-panel-header">
+
+                <div>
+                    <h2 class="oya-panel-title">
+                        Top Customers
+                    </h2>
+
+                    <p class="oya-panel-subtitle">
+                        Highest customer sales
+                    </p>
+                </div>
+
+            </div>
+
+            <div class="oya-panel-body">
+
+                <div class="oya-customer-list">
+
+                    @if (Model.customerSales != null &&
+                         Model.customerSales.Any())
+                    {
+                        foreach (var customer in Model.customerSales)
+                        {
+                            <div class="oya-customer-row">
+
+                                <div class="oya-customer-info">
+
+                                    <div class="oya-customer-avatar">
+
+                                        @{
+                                            var customerName =
+                                                customer.CustomerName?.Trim() ?? "";
+
+                                            var initials =
+                                                string.IsNullOrWhiteSpace(customerName)
+                                                    ? "?"
+                                                    : customerName
+                                                        .Substring(0, 1)
+                                                        .ToUpper();
+                                        }
+
+                                        @initials
+
+                                    </div>
+
+                                    <div class="oya-customer-name">
+                                        @customer.CustomerName
+                                    </div>
+
+                                </div>
+
+                                <div class="oya-customer-amount">
+                                    $@customer.TotalAmount.ToString("N2")
+                                </div>
+
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <div class="oya-panel-subtitle">
+                            No customer sales available.
+                        </div>
+                    }
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         YEARLY SALES + SUMMARY
+         ===================================================== -->
+
+    <div class="oya-dashboard-grid">
+
+        <!-- Yearly Sales -->
+        <div class="oya-panel">
+
+            <div class="oya-panel-header">
+
+                <div>
+                    <h2 class="oya-panel-title">
+                        Year Wise Sales
+                    </h2>
+
+                    <p class="oya-panel-subtitle">
+                        OYA and Pino annual performance
+                    </p>
+                </div>
+
+            </div>
+
+            <div class="oya-panel-body">
+
+                <div id="kt_charts_widget_38_chart_jaffar"
+                     class="oya-chart">
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Sales Summary -->
+        <div class="oya-panel">
+
+            <div class="oya-panel-header">
+
+                <div>
+                    <h2 class="oya-panel-title">
+                        Sales Summary
+                    </h2>
+
+                    <p class="oya-panel-subtitle">
+                        Current dashboard totals
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="oya-panel-body">
+
+                <div class="oya-customer-list">
+
+                    <div class="oya-customer-row">
+
+                        <span class="oya-customer-name">
+                            OYA This Month
+                        </span>
+
+                        <span class="oya-customer-amount">
+                            $@Model.dashboardSales.OYA_This_Month_Sales.ToString("N2")
+                        </span>
+
+                    </div>
+
+
+                    <div class="oya-customer-row">
+
+                        <span class="oya-customer-name">
+                            Pino This Month
+                        </span>
+
+                        <span class="oya-customer-amount">
+                            $@Model.dashboardSales.Pino_This_Month_Sales.ToString("N2")
+                        </span>
+
+                    </div>
+
+
+                    <div class="oya-customer-row">
+
+                        <span class="oya-customer-name">
+                            Other This Month
+                        </span>
+
+                        <span class="oya-customer-amount">
+                            $@Model.dashboardSales.TotalAmountOtherThisMonth.ToString("N2")
+                        </span>
+
+                    </div>
+
+
+                    <div class="oya-customer-row">
+
+                        <span class="oya-customer-name">
+                            Public Direct
+                        </span>
+
+                        <span class="oya-customer-amount">
+                            $@Model.dashboardSales.TotalAmountPublicDirect.ToString("N2")
+                        </span>
+
+                    </div>
+
+
+                    <div class="oya-customer-row">
+
+                        <span class="oya-customer-name">
+                            Foreign Business
+                        </span>
+
+                        <span class="oya-customer-amount">
+                            $@Model.dashboardSales.TotalAmountForeign.ToString("N2")
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+@section Scripts {
+
+    <script>
+
+        document.addEventListener("DOMContentLoaded", function() {
+
+            /*
+             * =========================================================
+             * SERVER DATA
+             * =========================================================
+             */
+
+            const oyaMonthlySales =
+                @Html.Raw(
+                System.Text.Json.JsonSerializer.Serialize(
+                Model.oyaMonthlySales
+                )
+                ) || [];
+
+            const pinoMonthlySales =
+                @Html.Raw(
+                System.Text.Json.JsonSerializer.Serialize(
+                Model.pinoMonthlySales
+                )
+                ) || [];
+
+            const oyaYearlySales =
+                @Html.Raw(
+                System.Text.Json.JsonSerializer.Serialize(
+                Model.oyaYearlySales
+                )
+                ) || [];
+
+            const pinoYearlySales =
+                @Html.Raw(
+                System.Text.Json.JsonSerializer.Serialize(
+                Model.pinoYearlySales
+                )
+                ) || [];
+
+
+            /*
+             * =========================================================
+             * MONTHLY SALES
+             * =========================================================
+             */
+
+            const monthlyChartElement =
+                document.getElementById("kt_charts_widget_jaffar");
+
+
+            if (
+                monthlyChartElement &&
+                typeof ApexCharts !== "undefined"
+            ) {
+
+                const months = [
+                    {
+                        number: 1,
+                        name: "Jan"
+                    },
+                    {
+                        number: 2,
+                        name: "Feb"
+                    },
+                    {
+                        number: 3,
+                        name: "Mar"
+                    },
+                    {
+                        number: 4,
+                        name: "Apr"
+                    },
+                    {
+                        number: 5,
+                        name: "May"
+                    },
+                    {
+                        number: 6,
+                        name: "Jun"
+                    },
+                    {
+                        number: 7,
+                        name: "Jul"
+                    },
+                    {
+                        number: 8,
+                        name: "Aug"
+                    },
+                    {
+                        number: 9,
+                        name: "Sep"
+                    },
+                    {
+                        number: 10,
+                        name: "Oct"
+                    },
+                    {
+                        number: 11,
+                        name: "Nov"
+                    },
+                    {
+                        number: 12,
+                        name: "Dec"
+                    }
+                ];
+
+
+                const monthlyCategories =
+                    months.map(x => x.name);
+
+
+                const oyaMonthlyData =
+                    months.map(month => {
+
+                        const record =
+                            oyaMonthlySales.find(
+                                x => Number(x.MonthNumber) === month.number
+                            );
+
+                        return record
+                            ? Number(record.TotalAmount)
+                            : 0;
+
+                    });
+
+
+                const pinoMonthlyData =
+                    months.map(month => {
+
+                        const record =
+                            pinoMonthlySales.find(
+                                x => Number(x.MonthNumber) === month.number
+                            );
+
+                        return record
+                            ? Number(record.TotalAmount)
+                            : 0;
+
+                    });
+
+
+                const monthlyOptions = {
+
+                    series: [
+                        {
+                            name: "OYA Sales",
+                            data: oyaMonthlyData
+                        },
+                        {
+                            name: "Pino Sales",
+                            data: pinoMonthlyData
+                        }
+                    ],
+
+                    chart: {
+                        type: "area",
+                        height: 330,
+                        toolbar: {
+                            show: false
+                        },
+                        zoom: {
+                            enabled: false
+                        },
+                        fontFamily: "inherit"
+                    },
+
+                    stroke: {
+                        curve: "smooth",
+                        width: 3
+                    },
+
+                    dataLabels: {
+                        enabled: false
+                    },
+
+                    markers: {
+                        size: 4,
+                        hover: {
+                            size: 6
+                        }
+                    },
+
+                    fill: {
+                        type: "gradient",
+                        gradient: {
+                            shadeIntensity: 1,
+                            opacityFrom: 0.30,
+                            opacityTo: 0.03,
+                            stops: [0, 90, 100]
+                        }
+                    },
+
+                    xaxis: {
+                        categories: monthlyCategories,
+
+                        axisBorder: {
+                            show: false
+                        },
+
+                        axisTicks: {
+                            show: false
+                        },
+
+                        labels: {
+                            style: {
+                                fontSize: "12px"
+                            }
+                        }
+                    },
+
+                    yaxis: {
+
+                        labels: {
+
+                            formatter: function(value) {
+
+                                if (!value) {
+                                    return "$0";
+                                }
+
+                                return "$" +
+                                    Number(value)
+                                        .toLocaleString(
+                                            "en-US",
+                                            {
+                                                maximumFractionDigits: 0
+                                            }
+                                        );
+
+                            }
+
+                        }
+
+                    },
+
+                    grid: {
+                        strokeDashArray: 4
+                    },
+
+                    legend: {
+                        show: true,
+                        position: "top",
+                        horizontalAlign: "right"
+                    },
+
+                    tooltip: {
+
+                        shared: true,
+                        intersect: false,
+
+                        y: {
+
+                            formatter: function(value) {
+
+                                return "$" +
+                                    Number(value)
+                                        .toLocaleString(
+                                            "en-US",
+                                            {
+                                                minimumFractionDigits: 2,
+                                                maximumFractionDigits: 2
+                                            }
+                                        );
+
+                            }
+
+                        }
+
+                    }
+
+                };
+
+
+                const monthlyChart =
+                    new ApexCharts(
+                        monthlyChartElement,
+                        monthlyOptions
+                    );
+
+                monthlyChart.render();
+
+            }
+
+
+            /*
+             * =========================================================
+             * YEARLY SALES
+             * =========================================================
+             */
+
+            const yearlyChartElement =
+                document.getElementById(
+                    "kt_charts_widget_38_chart_jaffar"
+                );
+
+
+            if (
+                yearlyChartElement &&
+                typeof ApexCharts !== "undefined"
+            ) {
+
+                const years = [
+                    ...oyaYearlySales.map(x => Number(x.Year)),
+                    ...pinoYearlySales.map(x => Number(x.Year))
+                ]
+                    .filter(
+                        (value, index, array) =>
+                            array.indexOf(value) === index
+                    )
+                    .sort(
+                        (a, b) => a - b
+                    );
+
+
+                const yearlyCategories =
+                    years.map(year => String(year));
+
+
+                const oyaYearlyData =
+                    years.map(year => {
+
+                        const record =
+                            oyaYearlySales.find(
+                                x => Number(x.Year) === year
+                            );
+
+                        return record
+                            ? Number(record.TotalAmount)
+                            : 0;
+
+                    });
+
+
+                const pinoYearlyData =
+                    years.map(year => {
+
+                        const record =
+                            pinoYearlySales.find(
+                                x => Number(x.Year) === year
+                            );
+
+                        return record
+                            ? Number(record.TotalAmount)
+                            : 0;
+
+                    });
+
+
+                const yearlyOptions = {
+
+                    series: [
+                        {
+                            name: "OYA Sales",
+                            data: oyaYearlyData
+                        },
+                        {
+                            name: "Pino Sales",
+                            data: pinoYearlyData
+                        }
+                    ],
+
+                    chart: {
+                        type: "bar",
+                        height: 330,
+                        toolbar: {
+                            show: false
+                        },
+                        fontFamily: "inherit"
+                    },
+
+                    plotOptions: {
+
+                        bar: {
+                            horizontal: false,
+                            columnWidth: "45%",
+                            borderRadius: 6
+                        }
+
+                    },
+
+                    dataLabels: {
+                        enabled: false
+                    },
+
+                    stroke: {
+                        show: true,
+                        width: 2,
+                        colors: ["transparent"]
+                    },
+
+                    xaxis: {
+
+                        categories: yearlyCategories,
+
+                        axisBorder: {
+                            show: false
+                        },
+
+                        axisTicks: {
+                            show: false
+                        },
+
+                        labels: {
+                            style: {
+                                fontSize: "12px"
+                            }
+                        }
+
+                    },
+
+                    yaxis: {
+
+                        labels: {
+
+                            formatter: function(value) {
+
+                                if (!value) {
+                                    return "$0";
+                                }
+
+                                return "$" +
+                                    Number(value)
+                                        .toLocaleString(
+                                            "en-US",
+                                            {
+                                                maximumFractionDigits: 0
+                                            }
+                                        );
+
+                            }
+
+                        }
+
+                    },
+
+                    grid: {
+                        strokeDashArray: 4
+                    },
+
+                    legend: {
+                        show: true,
+                        position: "top",
+                        horizontalAlign: "right"
+                    },
+
+                    tooltip: {
+
+                        shared: true,
+                        intersect: false,
+
+                        y: {
+
+                            formatter: function(value) {
+
+                                return "$" +
+                                    Number(value)
+                                        .toLocaleString(
+                                            "en-US",
+                                            {
+                                                minimumFractionDigits: 2,
+                                                maximumFractionDigits: 2
+                                            }
+                                        );
+
+                            }
+
+                        }
+
+                    }
+
+                };
+
+
+                const yearlyChart =
+                    new ApexCharts(
+                        yearlyChartElement,
+                        yearlyOptions
+                    );
+
+                yearlyChart.render();
+
+            }
+
+        });
+
+    </script>
+
+}

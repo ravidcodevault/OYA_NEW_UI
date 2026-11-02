@@ -1,0 +1,47 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+	<PropertyGroup>
+		<AssemblyName>OYA_Web_Application</AssemblyName>
+		<TargetFramework>net8.0</TargetFramework>
+		<OutputType>Exe</OutputType>
+
+		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<LangVersion>latest</LangVersion>
+		<UserSecretsId>OyaWebApplication-Local</UserSecretsId>
+		<DefaultItemExcludes>$(DefaultItemExcludes);outputs/**;publish/**;artifacts/**;PublishedApp/**;**/*.zip</DefaultItemExcludes>
+
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+		<CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Azure.Core" Version="1.44.1" />
+		<PackageReference Include="Azure.Identity" Version="1.13.2" />
+		<PackageReference Include="Azure.Security.KeyVault.Secrets" Version="4.7.0" />
+		<PackageReference Include="Microsoft.Data.SqlClient" Version="7.0.3" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="8.0.30" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+		<PackageReference Include="System.Data.SqlClient" Version="4.9.0" />
+		<PackageReference Include="System.DirectoryServices.Protocols" Version="8.0.0" />
+		<PackageReference Include="Microsoft.Office.Interop.Excel" Version="15.0.4795.1001" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Reference Include="GemBox.Spreadsheet">
+			<HintPath>libs\GemBox.Spreadsheet.dll</HintPath>
+			<Private>true</Private>
+		</Reference>
+
+		<Reference Include="Pubnub">
+			<HintPath>libs\Pubnub.dll</HintPath>
+			<Private>true</Private>
+		</Reference>
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Update="Templates\**\*" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+	</ItemGroup>
+
+</Project>

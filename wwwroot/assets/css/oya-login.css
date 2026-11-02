@@ -1,0 +1,942 @@
+﻿/* =========================================================
+   OYA BUSINESS PORTAL LOGIN
+   CLEAN WHITE + PINK DESIGN
+   ========================================================= */
+
+
+/* =========================================================
+   GLOBAL
+   ========================================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    background: #fafafa;
+    color: #111111;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+
+/* =========================================================
+   PAGE
+   ========================================================= */
+
+.oya-login-page {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    background: linear-gradient( 135deg, #ffffff 0%, #fff8fb 50%, #ffffff 100% );
+}
+
+
+/* =========================================================
+   MAIN WRAPPER
+   ========================================================= */
+
+.oya-login-wrapper {
+    position: relative;
+    width: min(1080px, 100%);
+    min-height: 650px;
+    display: grid;
+    grid-template-columns: 1fr 0.9fr;
+    background: #ffffff;
+    border-radius: 0;
+    box-shadow: 0 25px 70px rgba(20, 20, 20, 0.08);
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   LEFT BRAND SECTION
+   ========================================================= */
+
+.oya-brand-section {
+    position: relative;
+    min-width: 0;
+    min-height: 650px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 45px 55px 90px;
+    background: #ffffff;
+    text-align: center;
+}
+
+
+/* =========================================================
+   BRAND HEADER
+   ========================================================= */
+
+.oya-brand {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 12px;
+    flex-shrink: 0;
+}
+
+
+/* =========================================================
+   BRAND LOGO / D ICON
+   ========================================================= */
+
+.oya-brand-logo {
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border-radius: 11px;
+    background: #ec147e;
+    color: #ffffff;
+    font-size: 19px;
+    font-weight: 800;
+    box-shadow: 0 8px 20px rgba(236, 20, 126, 0.20);
+}
+
+
+/* =========================================================
+   BRAND TEXT
+   ========================================================= */
+
+.oya-brand-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+}
+
+    .oya-brand-text strong {
+        color: #111111;
+        font-size: 15px;
+        font-weight: 800;
+    }
+
+    .oya-brand-text span {
+        margin-top: 4px;
+        color: #929292;
+        font-size: 10px;
+        font-weight: 500;
+    }
+
+
+/* =========================================================
+   LOGO AREA
+   ========================================================= */
+
+.oya-logo-area {
+    width: 100%;
+    flex: 1;
+    min-height: 270px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 0 10px;
+}
+
+
+/* =========================================================
+   MAIN OYA LOGO
+   ========================================================= */
+
+.oya-main-logo {
+    display: block;
+    width: 220px;
+    max-width: 60%;
+    height: auto;
+    object-fit: contain;
+    filter: brightness(1.08) saturate(1.15);
+    transition: transform 0.25s ease, filter 0.25s ease;
+}
+
+    .oya-main-logo:hover {
+        transform: scale(1.02);
+        filter: brightness(1.14) saturate(1.2);
+    }
+
+
+/* =========================================================
+   BRAND CONTENT
+   ========================================================= */
+
+.oya-brand-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 5px;
+    text-align: center;
+}
+
+
+    /* =========================================================
+   MAIN BRAND HEADING
+   ========================================================= */
+
+    .oya-brand-content h1 {
+        width: 100%;
+        max-width: 520px;
+        margin: 0;
+        color: #111111;
+        font-size: clamp(36px, 4vw, 48px);
+        line-height: 1.08;
+        font-weight: 800;
+        letter-spacing: -1.8px;
+        text-align: center;
+    }
+
+        .oya-brand-content h1 span {
+            color: #ec147e;
+        }
+
+
+    /* =========================================================
+   DESCRIPTION
+   ========================================================= */
+
+    .oya-brand-content p {
+        max-width: 500px;
+        margin: 18px auto 0;
+        color: #777777;
+        font-size: 13px;
+        line-height: 1.7;
+        font-weight: 400;
+        text-align: center;
+    }
+
+
+/* =========================================================
+   FEATURES
+   ========================================================= */
+
+.oya-features {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 25px;
+    text-align: center;
+}
+
+
+/* =========================================================
+   FEATURE ITEM
+   ========================================================= */
+
+.oya-feature {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    min-height: 34px;
+    padding: 7px 12px;
+    border: 1px solid #eeeeee;
+    border-radius: 8px;
+    background: #ffffff;
+    color: #555555;
+    font-size: 10px;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   FEATURE CHECK
+   ========================================================= */
+
+.oya-feature-check {
+    width: 16px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: #fff0f7;
+    color: #ec147e;
+    font-size: 10px;
+    font-weight: 800;
+}
+
+
+/* =========================================================
+   FOOTER
+   IMPORTANT:
+   THIS IS CENTERED AGAINST THE ENTIRE
+   .oya-login-wrapper
+   ========================================================= */
+
+.oya-brand-footer {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 20px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin: 0;
+    padding: 0 20px;
+    color: #999999;
+    font-size: 9px;
+    font-weight: 500;
+    line-height: 1.4;
+    text-align: center;
+    z-index: 20;
+}
+
+
+    /* =========================================================
+   FOOTER SEPARATOR
+   ========================================================= */
+
+    .oya-brand-footer .footer-separator {
+        color: #ec147e;
+        font-weight: 700;
+    }
+
+
+/* =========================================================
+   LOGIN SECTION
+   ========================================================= */
+
+.oya-login-section {
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 55px;
+    background: #fafafa;
+}
+
+
+/* =========================================================
+   LOGIN CARD
+   ========================================================= */
+
+.oya-login-card {
+    width: min(390px, 100%);
+}
+
+
+/* =========================================================
+   LOGIN LABEL
+   ========================================================= */
+
+.oya-login-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    margin-bottom: 18px;
+    color: #777777;
+    font-size: 9px;
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   STATUS DOT
+   ========================================================= */
+
+.oya-status-dot {
+    width: 6px;
+    height: 6px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: #ec147e;
+}
+
+
+/* =========================================================
+   LOGIN HEADING
+   ========================================================= */
+
+.oya-login-heading {
+    margin-bottom: 30px;
+}
+
+    .oya-login-heading h2 {
+        margin: 0;
+        color: #111111;
+        font-size: 30px;
+        line-height: 1.15;
+        font-weight: 800;
+        letter-spacing: -0.8px;
+    }
+
+    .oya-login-heading p {
+        margin: 9px 0 0;
+        color: #898989;
+        font-size: 11px;
+        line-height: 1.6;
+    }
+
+
+/* =========================================================
+   FORM
+   ========================================================= */
+
+.oya-login-form {
+    width: 100%;
+}
+
+
+/* =========================================================
+   FORM GROUP
+   ========================================================= */
+
+.oya-form-group {
+    margin-bottom: 19px;
+}
+
+    .oya-form-group label {
+        display: block;
+        margin-bottom: 8px;
+        color: #333333;
+        font-size: 10px;
+        font-weight: 600;
+    }
+
+
+/* =========================================================
+   INPUT WRAPPER
+   ========================================================= */
+
+.oya-input-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+
+/* =========================================================
+   INPUT ICON
+   ========================================================= */
+
+.oya-input-icon {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    width: 17px;
+    height: 17px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translateY(-50%);
+    color: #999999;
+    pointer-events: none;
+    z-index: 2;
+}
+
+    .oya-input-icon svg {
+        width: 16px;
+        height: 16px;
+        fill: currentColor;
+    }
+
+
+/* =========================================================
+   INPUT
+   ========================================================= */
+
+.oya-input-wrapper input {
+    width: 100%;
+    height: 50px;
+    padding: 0 43px 0 42px;
+    border: 1px solid #e5e5e5;
+    border-radius: 9px;
+    outline: none;
+    background: #ffffff;
+    color: #222222;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 500;
+    box-shadow: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+    .oya-input-wrapper input::placeholder {
+        color: #aaaaaa;
+    }
+
+    .oya-input-wrapper input:hover {
+        border-color: #d8d8d8;
+    }
+
+    .oya-input-wrapper input:focus {
+        border-color: #ec147e;
+        background: #ffffff;
+        box-shadow: 0 0 0 3px rgba(236, 20, 126, 0.08);
+    }
+
+
+/* =========================================================
+   PASSWORD TOGGLE
+   ========================================================= */
+
+.oya-password-toggle {
+    position: absolute;
+    right: 9px;
+    top: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    transform: translateY(-50%);
+    border: 0;
+    border-radius: 7px;
+    background: transparent;
+    color: #999999;
+    cursor: pointer;
+    transition: color 0.18s ease, background 0.18s ease;
+}
+
+    .oya-password-toggle:hover {
+        background: #fff0f7;
+        color: #ec147e;
+    }
+
+    .oya-password-toggle svg {
+        width: 17px;
+        height: 17px;
+        fill: currentColor;
+    }
+
+
+/* =========================================================
+   ERROR MESSAGE
+   ========================================================= */
+
+.oya-login-message {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin: -2px 0 17px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background: #fff4f6;
+    color: #d94a65;
+    font-size: 10px;
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   ERROR ICON
+   ========================================================= */
+
+.oya-message-icon {
+    width: 17px;
+    height: 17px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: #ffe2e8;
+    color: #d94a65;
+    font-size: 10px;
+    font-weight: 800;
+}
+
+
+/* =========================================================
+   SIGN IN BUTTON
+   ========================================================= */
+
+.oya-sign-in-button {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 7px;
+    padding: 0 17px;
+    border: 0;
+    border-radius: 9px;
+    outline: none;
+    background: #ec147e;
+    color: #ffffff;
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(236, 20, 126, 0.18);
+    transition: transform 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
+}
+
+    .oya-sign-in-button:hover {
+        background: #df0c72;
+        transform: translateY(-1px);
+        box-shadow: 0 11px 25px rgba(236, 20, 126, 0.24);
+    }
+
+    .oya-sign-in-button:active {
+        transform: translateY(0);
+        box-shadow: 0 6px 15px rgba(236, 20, 126, 0.18);
+    }
+
+
+/* =========================================================
+   BUTTON ARROW
+   ========================================================= */
+
+.oya-button-arrow {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.16);
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   LOGIN HELP
+   ========================================================= */
+
+.oya-login-help {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: 20px;
+    color: #999999;
+    font-size: 9px;
+    text-align: center;
+}
+
+    .oya-login-help strong {
+        color: #444444;
+        font-weight: 600;
+    }
+
+
+/* =========================================================
+   SECURITY
+   ========================================================= */
+
+.oya-security {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 28px;
+    color: #aaaaaa;
+    font-size: 9px;
+    font-weight: 500;
+    text-align: center;
+}
+
+    .oya-security svg {
+        width: 14px;
+        height: 14px;
+        fill: #ec147e;
+    }
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 950px) {
+
+    .oya-login-page {
+        padding: 25px;
+    }
+
+    .oya-login-wrapper {
+        grid-template-columns: 1fr 0.95fr;
+        min-height: 600px;
+    }
+
+    .oya-brand-section {
+        min-height: 600px;
+        padding: 40px 40px 85px;
+    }
+
+    .oya-login-section {
+        padding: 40px;
+    }
+
+    .oya-main-logo {
+        width: 190px;
+    }
+
+    .oya-brand-content h1 {
+        font-size: 36px;
+    }
+
+    .oya-features {
+        gap: 6px;
+    }
+
+    .oya-feature {
+        padding: 6px 9px;
+    }
+
+    .oya-brand-footer {
+        bottom: 18px;
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 760px) {
+
+    .oya-login-page {
+        width: 100%;
+        min-height: 100vh;
+        padding: 0;
+        align-items: flex-start;
+        background: #ffffff;
+    }
+
+    .oya-login-wrapper {
+        width: 100%;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        border-radius: 0;
+        box-shadow: none;
+        overflow: hidden;
+        padding-bottom: 65px;
+    }
+
+
+    /* =====================================================
+       BRAND
+       ===================================================== */
+
+    .oya-brand-section {
+        width: 100%;
+        min-height: auto;
+        padding: 30px 25px 35px;
+        background: #ffffff;
+    }
+
+    .oya-brand {
+        justify-content: center;
+    }
+
+    .oya-logo-area {
+        width: 100%;
+        min-height: 180px;
+        padding: 20px 0 10px;
+    }
+
+    .oya-main-logo {
+        width: 150px;
+        max-width: 70%;
+    }
+
+    .oya-brand-content {
+        padding-top: 5px;
+    }
+
+        .oya-brand-content h1 {
+            font-size: 30px;
+            letter-spacing: -1px;
+        }
+
+        .oya-brand-content p {
+            font-size: 11px;
+            margin-top: 12px;
+        }
+
+    .oya-features {
+        display: none;
+    }
+
+
+    /* =====================================================
+       LOGIN
+       ===================================================== */
+
+    .oya-login-section {
+        width: 100%;
+        flex: 1;
+        align-items: flex-start;
+        padding: 30px 25px 35px;
+        background: #fafafa;
+    }
+
+    .oya-login-card {
+        width: 100%;
+    }
+
+    .oya-login-heading h2 {
+        font-size: 27px;
+    }
+
+
+    /* =====================================================
+       FOOTER
+       IMPORTANT:
+       STILL CENTERED AGAINST WHOLE WRAPPER
+       ===================================================== */
+
+    .oya-brand-footer {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 22px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0 15px;
+        gap: 8px;
+        font-size: 8px;
+        text-align: center;
+    }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 420px) {
+
+    .oya-brand-section {
+        padding: 25px 20px 30px;
+    }
+
+    .oya-login-section {
+        padding: 27px 20px 30px;
+    }
+
+    .oya-logo-area {
+        min-height: 155px;
+    }
+
+    .oya-main-logo {
+        width: 130px;
+    }
+
+    .oya-brand-content h1 {
+        font-size: 27px;
+    }
+
+    .oya-login-heading {
+        margin-bottom: 25px;
+    }
+
+        .oya-login-heading h2 {
+            font-size: 25px;
+        }
+
+    .oya-brand-footer {
+        bottom: 18px;
+        font-size: 7.5px;
+        gap: 6px;
+        padding: 0 10px;
+    }
+}
+
+
+/* =========================================================
+   ACCESSIBILITY
+   ========================================================= */
+
+button:focus-visible,
+input:focus-visible {
+    outline: 2px solid rgba(236, 20, 126, 0.35);
+    outline-offset: 2px;
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+    }
+}
+.oya-login-divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 18px 0;
+    color: #7b8494;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .08em;
+}
+
+.oya-login-divider::before,
+.oya-login-divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: #e5e8ef;
+}
+
+.oya-microsoft-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+    min-height: 48px;
+    box-sizing: border-box;
+    border: 1px solid #d5d9e0;
+    border-radius: 9px;
+    background: #fff;
+    color: #252733;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background-color .15s ease, border-color .15s ease;
+}
+
+.oya-microsoft-button:hover {
+    background: #f7f8fa;
+    border-color: #aeb5c0;
+}
+
+.oya-microsoft-button:focus-visible {
+    outline: 3px solid rgba(0, 120, 212, .25);
+    outline-offset: 2px;
+}
+
+.oya-microsoft-button svg {
+    width: 18px;
+    height: 18px;
+    flex: none;
+}

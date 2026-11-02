@@ -1,0 +1,1364 @@
+﻿/* =========================================================
+   OYA SYNC PAGE
+   ========================================================= */
+
+.oya-sync-page {
+    width: 100%;
+    min-height: calc(100vh - 1px);
+    padding: 28px 34px 50px;
+    box-sizing: border-box;
+    background: #fff8fb;
+    color: #263044;
+    font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+
+/* =========================================================
+   PAGE HEADER
+   ========================================================= */
+
+.oya-sync-page-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 25px;
+    margin-bottom: 28px;
+}
+
+.oya-breadcrumb {
+    margin-bottom: 8px;
+    color: #9b8792;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+    .oya-breadcrumb span {
+        margin: 0 6px;
+        color: #c1aeb7;
+    }
+
+.oya-sync-page-header h1 {
+    margin: 0;
+    color: #2b1f2a;
+    font-size: 30px;
+    line-height: 1.2;
+    font-weight: 750;
+    letter-spacing: -0.6px;
+}
+
+.oya-sync-page-header p {
+    margin: 8px 0 0;
+    color: #806b76;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   START SYNC BUTTON
+   ========================================================= */
+
+.oya-sync-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-width: 150px;
+    height: 44px;
+    padding: 0 20px;
+    border: 0;
+    border-radius: 10px;
+    background: #d81b60;
+    color: #ffffff !important;
+    text-decoration: none !important;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 6px 18px rgba(22, 119, 255, 0.20);
+    transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+}
+
+    .oya-sync-button:hover {
+        background: #b5124f;
+        color: #ffffff !important;
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(22, 119, 255, 0.27);
+    }
+
+    .oya-sync-button:active {
+        transform: translateY(0);
+    }
+
+
+/* =========================================================
+   MAIN SYNC CARD
+   ========================================================= */
+
+.oya-sync-main-card {
+    width: 100%;
+    overflow: hidden;
+    background: #ffffff;
+    border: 1px solid #eee1e8;
+    border-radius: 18px;
+    box-shadow: 0 8px 28px rgba(31, 50, 80, 0.055);
+}
+
+
+/* =========================================================
+   TOP STATUS SECTION
+   ========================================================= */
+
+.oya-sync-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+    padding: 24px 28px;
+    border-bottom: 1px solid #f3e7ed;
+}
+
+.oya-sync-status {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.oya-sync-status-icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 48px;
+    border-radius: 13px;
+    background: #fce7f3;
+    color: #d81b60;
+    font-size: 21px;
+    box-shadow: inset 0 0 0 1px rgba(22, 119, 255, 0.06);
+}
+
+.oya-sync-status h2 {
+    margin: 0;
+    color: #241c28;
+    font-size: 18px;
+    line-height: 1.3;
+    font-weight: 700;
+}
+
+.oya-sync-status p {
+    margin: 5px 0 0;
+    color: #95828c;
+    font-size: 13px;
+    line-height: 1.45;
+}
+
+
+/* =========================================================
+   SUMMARY CARDS
+   ========================================================= */
+
+.oya-sync-summary {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+    padding: 22px 28px;
+    background: #fffafd;
+    border-bottom: 1px solid #f3e7ed;
+}
+
+.oya-sync-summary-card {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    min-height: 72px;
+    padding: 15px 17px;
+    background: #ffffff;
+    border: 1px solid #eee1e8;
+    border-radius: 13px;
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+    .oya-sync-summary-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 22px rgba(16, 33, 58, 0.07);
+    }
+
+.oya-summary-icon {
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 38px;
+    border-radius: 10px;
+    background: #fce7f3;
+    color: #d81b60;
+    font-size: 16px;
+}
+
+.oya-summary-content {
+    min-width: 0;
+}
+
+    .oya-summary-content span {
+        display: block;
+        margin-bottom: 4px;
+        color: #95828c;
+        font-size: 11px;
+        font-weight: 600;
+    }
+
+    .oya-summary-content strong {
+        display: block;
+        color: #2b1f2a;
+        font-size: 17px;
+        font-weight: 750;
+    }
+
+
+/* =========================================================
+   TABLE SECTION
+   ========================================================= */
+
+.oya-sync-table-area {
+    padding: 28px;
+}
+
+.oya-sync-table-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 18px;
+}
+
+    .oya-sync-table-heading h3 {
+        margin: 0;
+        color: #241c28;
+        font-size: 18px;
+        font-weight: 700;
+    }
+
+    .oya-sync-table-heading span {
+        color: #a18e98;
+        font-size: 12px;
+    }
+
+
+/* =========================================================
+   TABLE CONTAINER
+   ========================================================= */
+
+.oya-sync-table-container {
+    width: 100%;
+    overflow-x: auto;
+    border: 1px solid #eee1e8;
+    border-radius: 13px;
+    background: #ffffff;
+    scrollbar-width: thin;
+}
+
+
+/* =========================================================
+   TABLE
+   ========================================================= */
+
+.oya-sync-table {
+    width: 100%;
+    min-width: 820px;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: #ffffff;
+}
+
+
+    /* =========================================================
+   TABLE HEADER
+   ========================================================= */
+
+    .oya-sync-table thead th {
+        padding: 14px 16px;
+        background: #fff7fb;
+        color: #806b76;
+        font-size: 11px;
+        font-weight: 750;
+        text-align: left;
+        text-transform: uppercase;
+        letter-spacing: 0.45px;
+        border-bottom: 1px solid #eee1e8;
+        white-space: nowrap;
+    }
+
+        .oya-sync-table thead th:first-child {
+            width: 60px;
+        }
+
+        .oya-sync-table thead th:nth-child(2) {
+            width: 34%;
+        }
+
+        .oya-sync-table thead th:nth-child(3) {
+            width: 16%;
+        }
+
+        .oya-sync-table thead th:nth-child(4) {
+            width: 25%;
+        }
+
+        .oya-sync-table thead th:nth-child(5) {
+            width: 20%;
+        }
+
+
+    /* =========================================================
+   TABLE BODY
+   ========================================================= */
+
+    .oya-sync-table tbody td {
+        padding: 17px 16px;
+        color: #3a2d37;
+        font-size: 13px;
+        vertical-align: middle;
+        border-bottom: 1px solid #f3e7ed;
+        background: #ffffff;
+    }
+
+    .oya-sync-table tbody tr:last-child td {
+        border-bottom: 0;
+    }
+
+    .oya-sync-table tbody tr {
+        transition: background 0.15s ease;
+    }
+
+        .oya-sync-table tbody tr:hover td {
+            background: #fffafd;
+        }
+
+
+/* =========================================================
+   ROW NUMBER
+   ========================================================= */
+
+.oya-sync-number {
+    width: 30px;
+    height: 30px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9px;
+    background: #fce7f3;
+    color: #d81b60;
+    font-size: 12px;
+    font-weight: 750;
+}
+
+
+/* =========================================================
+   SYNC ELEMENT
+   ========================================================= */
+
+.oya-sync-element {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    min-width: 0;
+    color: #2d2130;
+    font-size: 13px;
+    font-weight: 650;
+}
+
+.oya-sync-element-icon {
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 34px;
+    border-radius: 9px;
+    background: #fff4f8;
+    border: 1px solid #f0dfe7;
+    color: #806b76;
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   ELEMENT NAME
+   ========================================================= */
+
+.oya-sync-element-name {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+}
+
+    .oya-sync-element-name strong {
+        display: block;
+        color: #2d2130;
+        font-size: 13px;
+        font-weight: 700;
+    }
+
+    .oya-sync-element-name span {
+        display: block;
+        color: #a18e98;
+        font-size: 11px;
+        white-space: nowrap;
+    }
+
+
+/* =========================================================
+   ACTIVE STATUS
+   ========================================================= */
+
+.oya-sync-active {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    min-height: 28px;
+    padding: 0 10px;
+    border-radius: 999px;
+    background: #eefbf4;
+    color: #15945a;
+    font-size: 11px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.oya-sync-active-dot {
+    width: 6px;
+    height: 6px;
+    flex: 0 0 6px;
+    border-radius: 50%;
+    background: #20b66b;
+}
+
+
+/* =========================================================
+   SUCCESS STATUS
+   ========================================================= */
+
+.oya-sync-success {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    color: #15945a;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.oya-sync-success-icon {
+    width: 19px;
+    height: 19px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #eaf9f1;
+    color: #16a05d;
+    font-size: 10px;
+}
+
+.oya-sync-records {
+    display: block;
+    margin-top: 4px;
+    color: #8f7b85;
+    font-size: 11px;
+    font-weight: 500;
+}
+
+
+/* =========================================================
+   LAST SYNCED
+   ========================================================= */
+
+.oya-sync-last {
+    color: #50627a;
+    font-size: 12px;
+    font-weight: 550;
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   DESCRIPTION
+   ========================================================= */
+
+.oya-sync-description {
+    color: #806b76;
+    font-size: 12px;
+    line-height: 1.45;
+}
+
+
+/* =========================================================
+   AUTOMATIC SYNC INFORMATION
+   ========================================================= */
+
+.oya-sync-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 18px;
+    padding: 14px 16px;
+    border: 1px solid #f1dce6;
+    border-radius: 10px;
+    background: #fff7fa;
+    color: #6d7e94;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.oya-sync-info-icon {
+    flex: 0 0 auto;
+    color: #d81b60;
+    font-size: 15px;
+}
+
+
+/* =========================================================
+   REMOVE UNWANTED RAW ICON/TEXT OUTPUT
+   ========================================================= */
+
+/*
+   Your current view appears to output the first letter
+   of the Sync Element (C, I, R, S...) separately.
+
+   If those characters are inside the element icon,
+   this keeps the icon area clean and prevents it from
+   affecting the table layout.
+*/
+
+.oya-sync-element-icon {
+    overflow: hidden;
+    text-align: center;
+    line-height: 1;
+}
+
+
+/* =========================================================
+   EMPTY / NULL VALUES
+   ========================================================= */
+
+.oya-sync-table td:empty::after {
+    content: "—";
+    color: #bcaab2;
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   CARD / TABLE SAFETY
+   ========================================================= */
+
+.oya-sync-page *,
+.oya-sync-page *::before,
+.oya-sync-page *::after {
+    box-sizing: border-box;
+}
+
+.oya-sync-page h1,
+.oya-sync-page h2,
+.oya-sync-page h3,
+.oya-sync-page p,
+.oya-sync-page span,
+.oya-sync-page strong,
+.oya-sync-page table {
+    font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+.oya-sync-page table {
+    margin-bottom: 0 !important;
+}
+
+
+/* =========================================================
+   RESPONSIVE - 1100px
+   ========================================================= */
+
+@media (max-width: 1100px) {
+
+    .oya-sync-page {
+        padding: 26px 24px 45px;
+    }
+
+    .oya-sync-summary {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .oya-sync-table-area {
+        padding: 24px;
+    }
+}
+
+
+/* =========================================================
+   RESPONSIVE - 900px
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    .oya-sync-page-header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .oya-sync-button {
+        align-self: flex-start;
+    }
+
+    .oya-sync-top {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .oya-sync-summary {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* =========================================================
+   RESPONSIVE - 768px
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+    .oya-sync-page {
+        padding: 22px 16px 35px;
+    }
+
+    .oya-sync-page-header {
+        margin-bottom: 22px;
+    }
+
+        .oya-sync-page-header h1 {
+            font-size: 26px;
+        }
+
+        .oya-sync-page-header p {
+            font-size: 13px;
+        }
+
+    .oya-sync-button {
+        width: 100%;
+    }
+
+    .oya-sync-main-card {
+        border-radius: 14px;
+    }
+
+    .oya-sync-top {
+        padding: 20px;
+    }
+
+    .oya-sync-summary {
+        padding: 16px;
+    }
+
+    .oya-sync-table-area {
+        padding: 20px 16px 24px;
+    }
+
+    .oya-sync-table-heading {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 5px;
+    }
+}
+
+
+/* =========================================================
+   RESPONSIVE - 480px
+   ========================================================= */
+
+@media (max-width: 480px) {
+
+    .oya-sync-page {
+        padding: 18px 12px 28px;
+    }
+
+    .oya-sync-page-header h1 {
+        font-size: 23px;
+    }
+
+    .oya-sync-status {
+        align-items: flex-start;
+    }
+
+    .oya-sync-status-icon {
+        width: 42px;
+        height: 42px;
+        flex-basis: 42px;
+    }
+
+    .oya-sync-status h2 {
+        font-size: 16px;
+    }
+
+    .oya-sync-status p {
+        font-size: 12px;
+    }
+
+    .oya-sync-table-area {
+        padding: 18px 12px 22px;
+    }
+
+    .oya-sync-summary-card {
+        min-height: 64px;
+        padding: 13px 14px;
+    }
+
+    .oya-summary-icon {
+        width: 34px;
+        height: 34px;
+        flex-basis: 34px;
+    }
+}
+
+
+/* =========================================================
+   SCROLLBAR
+   ========================================================= */
+
+.oya-sync-table-container::-webkit-scrollbar {
+    height: 7px;
+}
+
+.oya-sync-table-container::-webkit-scrollbar-track {
+    background: #f7edf2;
+}
+
+.oya-sync-table-container::-webkit-scrollbar-thumb {
+    background: #d8c3cd;
+    border-radius: 10px;
+}
+
+    .oya-sync-table-container::-webkit-scrollbar-thumb:hover {
+        background: #c9b3be;
+    }
+
+
+/* =========================================================
+   LIVE SYNC STATUS
+   ========================================================= */
+
+.oya-sync-live-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    color: #6f8198;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.oya-live-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #20b66b;
+    box-shadow: 0 0 0 4px rgba(32, 182, 107, 0.10);
+    animation: oya-live-pulse 1.8s infinite;
+}
+
+.oya-refresh-text {
+    color: #aa969f;
+    font-weight: 500;
+    margin-left: 3px;
+}
+
+
+/* =========================================================
+   SYNC BUTTON LOADING
+   ========================================================= */
+
+.oya-sync-button-loading {
+    pointer-events: none;
+    opacity: 0.85;
+}
+
+.oya-sync-button-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.oya-spin {
+    animation: oya-spin 0.8s linear infinite;
+}
+
+
+/* =========================================================
+   PENDING / RUNNING STATUS
+   ========================================================= */
+
+.oya-sync-pending {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #d81b60;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.oya-sync-pending-icon {
+    width: 20px;
+    height: 20px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #fce7f3;
+    color: #d81b60;
+    font-size: 11px;
+    animation: oya-spin 1.2s linear infinite;
+}
+
+.oya-sync-pending .oya-sync-records {
+    color: #8f7b85;
+}
+
+
+/* =========================================================
+   ERROR STATUS
+   ========================================================= */
+
+.oya-sync-status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    min-height: 28px;
+    padding: 0 10px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.oya-sync-status-error {
+    background: #fff3f3;
+    color: #d64545;
+}
+
+.oya-sync-status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #d64545;
+}
+
+
+/* =========================================================
+   EMPTY STATE
+   ========================================================= */
+
+.oya-sync-empty {
+    padding: 55px 20px;
+    text-align: center;
+    color: #95828c;
+}
+
+.oya-sync-empty-icon {
+    width: 48px;
+    height: 48px;
+    margin: 0 auto 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 13px;
+    background: #fce7f3;
+    color: #d81b60;
+    font-size: 20px;
+}
+
+.oya-sync-empty strong {
+    display: block;
+    margin-bottom: 5px;
+    color: #2d2130;
+    font-size: 14px;
+}
+
+.oya-sync-empty span {
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   ANIMATIONS
+   ========================================================= */
+
+@keyframes oya-spin {
+
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
+@keyframes oya-live-pulse {
+
+    0% {
+        box-shadow: 0 0 0 0 rgba(32, 182, 107, 0.30);
+    }
+
+    70% {
+        box-shadow: 0 0 0 5px rgba(32, 182, 107, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(32, 182, 107, 0);
+    }
+}
+
+
+/* =========================================================
+   SYNC STATUS ICON ANIMATION
+   ========================================================= */
+
+.oya-sync-status-icon {
+    transition: transform 0.2s ease;
+}
+
+.oya-sync-main-card:hover .oya-sync-status-icon {
+    transform: rotate(10deg);
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+    .oya-sync-live-status {
+        align-items: flex-start;
+        flex-wrap: wrap;
+    }
+
+    .oya-refresh-text {
+        width: 100%;
+        margin-left: 14px;
+    }
+}
+/* =========================================================
+   LAST SYNCED
+   ========================================================= */
+
+.oya-sync-last {
+    display: inline-block;
+    color: #52647a;
+    font-size: 12px;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   ACTIVE STATUS
+   ========================================================= */
+
+.oya-sync-status-active {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 7px 11px;
+    border-radius: 999px;
+    background: #eefbf4;
+    color: #14995c;
+    font-size: 11px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+    .oya-sync-status-active .oya-sync-status-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: #20b66b;
+    }
+
+
+/* =========================================================
+   ERROR STATUS
+   ========================================================= */
+
+.oya-sync-status-error {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 7px 11px;
+    border-radius: 999px;
+    background: #fff2f2;
+    color: #d64545;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+    .oya-sync-status-error .oya-sync-status-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: #d64545;
+    }
+
+
+/* =========================================================
+   SUCCESS
+   ========================================================= */
+
+.oya-sync-success {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+}
+
+.oya-sync-success-icon {
+    width: 22px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #eefbf4;
+    color: #18a765;
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.oya-sync-success strong {
+    display: block;
+    color: #14995c;
+    font-size: 12px;
+    line-height: 16px;
+}
+
+.oya-sync-records {
+    display: block;
+    color: #7d8da2;
+    font-size: 11px;
+    line-height: 16px;
+}
+
+
+/* =========================================================
+   PENDING / RUNNING
+   ========================================================= */
+
+.oya-sync-pending {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+}
+
+.oya-sync-pending-icon {
+    width: 22px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #fce7f3;
+    color: #d81b60;
+    font-size: 12px;
+    animation: oya-spin 1s linear infinite;
+}
+
+.oya-sync-pending strong {
+    display: block;
+    color: #d81b60;
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   LIVE STATUS
+   ========================================================= */
+
+.oya-sync-live-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    color: #6f8198;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.oya-live-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #20b66b;
+    animation: oya-live-pulse 1.8s infinite;
+}
+
+.oya-refresh-text {
+    color: #aa969f;
+    font-weight: 500;
+    margin-left: 2px;
+}
+
+
+/* =========================================================
+   BUTTON LOADING
+   ========================================================= */
+
+.oya-sync-button-loading {
+    pointer-events: none;
+    opacity: 0.85;
+}
+
+.oya-sync-button-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.oya-spin {
+    animation: oya-spin 0.8s linear infinite;
+}
+
+
+/* =========================================================
+   EMPTY STATE
+   ========================================================= */
+
+.oya-sync-empty {
+    padding: 55px 20px;
+    text-align: center;
+    color: #95828c;
+}
+
+.oya-sync-empty-icon {
+    width: 48px;
+    height: 48px;
+    margin: 0 auto 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 13px;
+    background: #fce7f3;
+    color: #d81b60;
+    font-size: 20px;
+}
+
+.oya-sync-empty strong {
+    display: block;
+    margin-bottom: 5px;
+    color: #2d2130;
+    font-size: 14px;
+}
+
+.oya-sync-empty span {
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   ANIMATIONS
+   ========================================================= */
+
+@keyframes oya-spin {
+
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
+@keyframes oya-live-pulse {
+
+    0% {
+        box-shadow: 0 0 0 0 rgba(32, 182, 107, 0.30);
+    }
+
+    70% {
+        box-shadow: 0 0 0 5px rgba(32, 182, 107, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(32, 182, 107, 0);
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+    .oya-sync-live-status {
+        flex-wrap: wrap;
+        justify-content: flex-end;
+    }
+
+    .oya-refresh-text {
+        width: 100%;
+        margin-left: 14px;
+    }
+
+    .oya-sync-last {
+        white-space: normal;
+    }
+}
+
+/* =========================================================
+   OYA PINK / MAGENTA THEME OVERRIDES
+   ========================================================= */
+
+.oya-sync-page {
+    background: radial-gradient(circle at 88% 0%, rgba(216, 27, 96, 0.055), transparent 30%), #fff8fb;
+}
+
+.oya-sync-page-header h1 {
+    color: #241c28;
+}
+
+.oya-breadcrumb span:last-child {
+    color: #d81b60;
+    font-weight: 700;
+}
+
+.oya-sync-main-card {
+    border-color: #f0dce5;
+    box-shadow: 0 10px 35px rgba(83, 33, 55, 0.055);
+}
+
+.oya-sync-button {
+    background: linear-gradient(135deg, #d81b60 0%, #c2185b 100%);
+    border-color: #d81b60;
+    color: #ffffff;
+    box-shadow: 0 8px 18px rgba(216, 27, 96, 0.20);
+}
+
+    .oya-sync-button:hover:not(:disabled) {
+        background: linear-gradient(135deg, #c2185b 0%, #ad1457 100%);
+        border-color: #c2185b;
+        box-shadow: 0 10px 22px rgba(216, 27, 96, 0.26);
+        transform: translateY(-1px);
+    }
+
+    .oya-sync-button:focus-visible {
+        outline: 3px solid rgba(216, 27, 96, 0.18);
+        outline-offset: 2px;
+    }
+
+    .oya-sync-button.sync-button-running {
+        background: linear-gradient(135deg, #ad1457 0%, #9c124e 100%);
+    }
+
+.oya-sync-status-icon,
+.oya-summary-icon,
+.oya-sync-number,
+.oya-sync-empty-icon,
+.oya-sync-element-icon {
+    background: #fce7f3;
+    color: #d81b60;
+}
+
+.oya-sync-status-icon {
+    box-shadow: inset 0 0 0 1px rgba(216, 27, 96, 0.08);
+}
+
+.oya-sync-element-icon {
+    border-color: #f0d6e1;
+}
+
+.oya-sync-status-active {
+    background: #fce7f3;
+    color: #b5124f;
+}
+
+    .oya-sync-status-active .oya-sync-status-dot {
+        background: #d81b60;
+    }
+
+.oya-sync-status-running,
+.oya-sync-pending {
+    color: #d81b60;
+}
+
+    .oya-sync-status-running .oya-sync-status-dot,
+    .oya-sync-pending-icon {
+        background: #d81b60;
+    }
+
+.oya-sync-pending-icon {
+    color: #ffffff;
+    box-shadow: 0 0 0 4px rgba(216, 27, 96, 0.10);
+}
+
+.oya-sync-info {
+    border-color: #f0dce5;
+    background: #fff7fa;
+}
+
+.oya-sync-info-icon {
+    color: #d81b60;
+}
+
+.oya-sync-live-status .oya-live-dot {
+    background: #d81b60;
+    box-shadow: 0 0 0 4px rgba(216, 27, 96, 0.10);
+}
+
+@keyframes oya-live-pulse-pink {
+    0% {
+        box-shadow: 0 0 0 0 rgba(216, 27, 96, 0.30);
+    }
+
+    70% {
+        box-shadow: 0 0 0 5px rgba(216, 27, 96, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(216, 27, 96, 0);
+    }
+}
+
+.oya-live-dot {
+    animation: oya-live-pulse-pink 1.8s infinite;
+}
+
+.oya-sync-table tbody tr:hover td {
+    background: #fff8fb;
+}
+
+.oya-sync-table-container::-webkit-scrollbar-thumb:hover {
+    background: #c5a9b6;
+}
+
+/* Make the header action feel like the Dashboard Start Sync button. */
+.oya-sync-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.oya-sync-button {
+    min-width: 165px;
+    min-height: 42px;
+    padding: 0 18px;
+    border-radius: 10px;
+    font-weight: 700;
+    letter-spacing: 0.05px;
+}
+
+.oya-sync-button-icon {
+    margin-right: 7px;
+}
+
+@media (max-width: 900px) {
+    .oya-sync-actions {
+        justify-content: flex-start;
+    }
+}

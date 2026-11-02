@@ -1,0 +1,716 @@
+@model OYA_Web_Application.Models.Data.Dashboard.DashboardSales
+
+@{
+    ViewData["Title"] = "Reports";
+    var contractors = ViewBag.Contractors as IEnumerable<dynamic>;
+}
+
+<div class="oya-reports-page">
+
+    <!-- =====================================================
+         PAGE HEADER
+         ===================================================== -->
+
+    <div class="oya-reports-header">
+
+        <div class="oya-reports-header-left">
+
+            <div class="oya-reports-breadcrumb">
+                <span>Home</span>
+                <span class="oya-breadcrumb-arrow">/</span>
+                <strong>Reports</strong>
+            </div>
+
+            <h1>Reports</h1>
+
+            <p>
+                Generate and download your business reports
+            </p>
+
+        </div>
+
+        <div class="oya-reports-date">
+            <span class="oya-date-icon">▣</span>
+
+            <span>
+                @DateTime.Now.ToString("MMMM dd, yyyy")
+            </span>
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+     SALES OVERVIEW
+     ===================================================== -->
+
+    <section class="oya-sales-overview">
+
+        <div class="oya-report-section-title">
+            <div>
+                <h2>Sales Overview</h2>
+                <p>Current dashboard sales</p>
+            </div>
+        </div>
+
+        <div class="oya-sales-stat-grid">
+
+            <!-- =================================================
+             OVERALL SALES
+             ================================================= -->
+
+            <div class="oya-sales-stat-card">
+
+                <div class="oya-sales-stat-icon oya-blue">
+                    $
+                </div>
+
+                <div class="oya-sales-stat-content">
+
+                    <span>Overall Sales</span>
+
+                    <strong>
+                        $@Model.TotalAmountOverallOya.ToString("N2")
+                    </strong>
+
+                    <small>
+                        Total business sales
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+             OYA SALES
+             ================================================= -->
+
+            <div class="oya-sales-stat-card">
+
+                <div class="oya-sales-stat-icon oya-green">
+                    O
+                </div>
+
+                <div class="oya-sales-stat-content">
+
+                    <span>OYA Sales</span>
+
+                    <strong>
+                        $@Model.OYA_This_Month_Sales.ToString("N2")
+                    </strong>
+
+                    <small>
+                        OYA overall sales
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+             PINO SALES
+             ================================================= -->
+
+            <div class="oya-sales-stat-card">
+
+                <div class="oya-sales-stat-icon oya-purple">
+                    P
+                </div>
+
+                <div class="oya-sales-stat-content">
+
+                    <span>Pino Sales</span>
+
+                    <strong>
+                        $@Model.Pino_This_Month_Sales.ToString("N2")
+                    </strong>
+
+                    <small>
+                        Current month
+                    </small>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- =====================================================
+         REPORT CONTENT
+         ===================================================== -->
+
+    <div class="oya-reports-grid">
+
+
+        <!-- =================================================
+             AVAILABLE REPORTS
+             ================================================= -->
+
+        <section class="oya-available-reports">
+
+            <div class="oya-report-card-header">
+
+                <div class="oya-report-header-icon">
+                    ≡
+                </div>
+
+                <div>
+
+                    <h2>Available Reports</h2>
+
+                    <p>
+                        Select a report to download
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="oya-report-list">
+
+
+                <!-- =================================================
+                     01 DAILY REPORT
+                     ================================================= -->
+
+                <div class="oya-report-row">
+
+                    <div class="oya-report-number">
+                        01
+                    </div>
+
+                    <div class="oya-report-icon">
+                        ↓
+                    </div>
+
+                    <div class="oya-report-info">
+
+                        <strong>
+                            Helias Daily Report
+                        </strong>
+
+                        <span>
+                            Daily sales report
+                        </span>
+
+                    </div>
+
+                    <form asp-controller="Home"
+                          asp-action="DownloadReport"
+                          method="get">
+
+                        <input type="hidden"
+                               name="reportType"
+                               value="HeliasDailyReport" />
+
+                        <button type="submit"
+                                class="oya-report-download-btn">
+
+                            Download
+
+                        </button>
+
+                    </form>
+
+                </div>
+
+
+                <!-- =================================================
+                     02 TERRITORY
+                     ================================================= -->
+
+                <div class="oya-report-row">
+
+                    <div class="oya-report-number">
+                        02
+                    </div>
+
+                    <div class="oya-report-icon">
+                        ◫
+                    </div>
+
+                    <div class="oya-report-info">
+
+                        <strong>
+                            OYA Territory Sales
+                        </strong>
+
+                        <span>
+                            Sales by territory
+                        </span>
+
+                    </div>
+
+                    <form asp-controller="Home"
+                          asp-action="DownloadReport"
+                          method="get">
+
+                        <input type="hidden"
+                               name="reportType"
+                               value="Territory_Report" />
+
+                        <button type="submit"
+                                class="oya-report-download-btn">
+
+                            Download
+
+                        </button>
+
+                    </form>
+
+                </div>
+
+
+                <!-- =================================================
+                     03 INTERNATIONAL
+                     ================================================= -->
+
+                <div class="oya-report-row">
+
+                    <div class="oya-report-number">
+                        03
+                    </div>
+
+                    <div class="oya-report-icon">
+                        ◎
+                    </div>
+
+                    <div class="oya-report-info">
+
+                        <strong>
+                            International Sales
+                        </strong>
+
+                        <span>
+                            International sales report
+                        </span>
+
+                    </div>
+
+                    <form asp-controller="Home"
+                          asp-action="DownloadReport"
+                          method="get">
+
+                        <input type="hidden"
+                               name="reportType"
+                               value="Territory_International" />
+
+                        <button type="submit"
+                                class="oya-report-download-btn">
+
+                            Download
+
+                        </button>
+
+                    </form>
+
+                </div>
+
+
+                <!-- =================================================
+                     04 OYA AGING
+                     ================================================= -->
+
+                <div class="oya-report-row">
+
+                    <div class="oya-report-number">
+                        04
+                    </div>
+
+                    <div class="oya-report-icon">
+                        $
+                    </div>
+
+                    <div class="oya-report-info">
+
+                        <strong>
+                            OYA Aging Reports
+                        </strong>
+
+                        <span>
+                            OYA accounts receivable aging
+                        </span>
+
+                    </div>
+
+                    <div class="oya-report-actions">
+
+                        <form asp-controller="Home"
+                              asp-action="DownloadReport"
+                              method="get">
+
+                            <input type="hidden"
+                                   name="reportType"
+                                   value="AR_Aging_Detail_Oya" />
+
+                            <button type="submit"
+                                    class="oya-report-small-btn">
+
+                                Detail
+
+                            </button>
+
+                        </form>
+
+                        <form asp-controller="Home"
+                              asp-action="DownloadReport"
+                              method="get">
+
+                            <input type="hidden"
+                                   name="reportType"
+                                   value="AR_Aging_Summary_Oya" />
+
+                            <button type="submit"
+                                    class="oya-report-small-btn secondary">
+
+                                Summary
+
+                            </button>
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =================================================
+                     05 PINO AGING
+                     ================================================= -->
+
+                <div class="oya-report-row">
+
+                    <div class="oya-report-number">
+                        05
+                    </div>
+
+                    <div class="oya-report-icon">
+                        P
+                    </div>
+
+                    <div class="oya-report-info">
+
+                        <strong>
+                            Pino Aging Reports
+                        </strong>
+
+                        <span>
+                            Pino accounts receivable aging
+                        </span>
+
+                    </div>
+
+                    <div class="oya-report-actions">
+
+                        <form asp-controller="Home"
+                              asp-action="DownloadReport"
+                              method="get">
+
+                            <input type="hidden"
+                                   name="reportType"
+                                   value="AR_Aging_Detail_Pino" />
+
+                            <button type="submit"
+                                    class="oya-report-small-btn">
+
+                                Detail
+
+                            </button>
+
+                        </form>
+
+                        <form asp-controller="Home"
+                              asp-action="DownloadReport"
+                              method="get">
+
+                            <input type="hidden"
+                                   name="reportType"
+                                   value="AR_Aging_Summary_Pino" />
+
+                            <button type="submit"
+                                    class="oya-report-small-btn secondary">
+
+                                Summary
+
+                            </button>
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             COMMISSION REPORTS
+             ================================================= -->
+
+        <section class="oya-commission-section">
+
+            <!-- COMMISSION HEADER -->
+
+            <div class="oya-commission-top">
+
+                <div class="oya-commission-icon">
+                    %
+                </div>
+
+                <div>
+
+                    <h2>Commission Reports</h2>
+
+                    <p>
+                        Select a commission report to download
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="oya-commission-divider"></div>
+
+
+            <!-- =================================================
+                 COMMISSION REPORT FORM
+
+IMPORTANT:
+                 Date fields are OPTIONAL.
+                 No JavaScript validation is used.
+                 ================================================= -->
+
+            <form asp-controller="Home"
+                  asp-action="DownloadReport"
+                  method="post"
+                  class="oya-commission-form"
+                  id="commissionForm">
+
+
+                <!-- =================================================
+                     OPTIONAL DATE RANGE
+                     ================================================= -->
+
+                <div class="oya-form-group">
+
+                    <label>
+                        Date Range
+                    </label>
+
+
+                    <div class="oya-date-range">
+
+                        <!-- START DATE -->
+
+                        <div class="oya-date-input-wrapper">
+
+                            <span>
+                                Start Date
+                            </span>
+
+                            <input type="date"
+                                   id="fromDate"
+                                   name="fromDate"
+                                   class="oya-report-input" />
+
+                        </div>
+
+
+                        <!-- END DATE -->
+
+                        <div class="oya-date-input-wrapper">
+
+                            <span>
+                                End Date
+                            </span>
+
+                            <input type="date"
+                                   id="toDate"
+                                   name="toDate"
+                                   class="oya-report-input" />
+
+                        </div>
+
+                    </div>
+
+                    <small class="oya-date-help">
+                        Leave both dates blank to include the current month through today. If you enter dates, provide a valid range with the start on or before the end.
+                    </small>
+
+                </div>
+
+
+                <!-- =================================================
+                     COMMISSION REPORT BUTTONS
+
+                     ALL BUTTONS DOWNLOAD DIRECTLY.
+                     NO DATE REQUIRED.
+                     ================================================= -->
+
+                <div class="oya-commission-report-buttons">
+
+
+                    <!-- CH1 -->
+
+                    <button type="submit"
+                            name="reportType"
+                            value="Commission_CH1"
+                            class="oya-commission-report-btn">
+
+                        CH1 - Report
+
+                    </button>
+
+
+                    <!-- OS2 -->
+
+                    <button type="submit"
+                            name="reportType"
+                            value="Commission_OS2"
+                            class="oya-commission-report-btn">
+
+                        OS2 - Report
+
+                    </button>
+
+
+                    <!-- EP3 -->
+
+                    <button type="submit"
+                            name="reportType"
+                            value="Commission_EP3"
+                            class="oya-commission-report-btn">
+
+                        EP3 - Report
+
+                    </button>
+
+
+                    <!-- AG4 -->
+
+                    <button type="submit"
+                            name="reportType"
+                            value="Commission_AG4"
+                            class="oya-commission-report-btn">
+
+                        AG4 - Report
+
+                    </button>
+
+
+                    <!-- 05OR -->
+
+                    <button type="submit"
+                            name="reportType"
+                            value="Commission_05OR"
+                            class="oya-commission-report-btn">
+
+                        05OR - Report
+
+                    </button>
+
+
+                    <!-- 06 -->
+
+                    <button type="submit"
+                            name="reportType"
+                            value="Commission_06"
+                            class="oya-commission-report-btn">
+
+                        06 - Report
+
+                    </button>
+
+
+                </div>
+
+
+            </form>
+
+        </section>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     REPORT STYLES
+     ========================================================= -->
+@section Styles {
+
+    <link rel="stylesheet"
+          href="~/assets/css/dashboard.css"
+          asp-append-version="true" />
+
+    <link rel="stylesheet"
+          href="~/assets/css/reports.css"
+          asp-append-version="true" />
+
+}
+
+
+<!-- =========================================================
+     REPORT SCRIPTS
+     ========================================================= -->
+@section Scripts {
+
+    <script>
+
+        /*
+         * =====================================================
+         * COMMISSION REPORTS
+         * =====================================================
+         *
+         * Dates are OPTIONAL.
+         *
+         * No validation is performed here.
+         *
+         * Clicking any commission button submits:
+         *
+         *     reportType
+         *     fromDate (if selected)
+         *     toDate   (if selected)
+         *
+         * The existing backend endpoint remains unchanged.
+         * =====================================================
+         */
+
+        document.addEventListener("DOMContentLoaded", function () {
+
+            const form = document.getElementById("commissionForm");
+
+            if (!form) {
+                return;
+            }
+
+            /*
+             * Do NOT prevent form submission.
+             *
+             * All buttons are normal submit buttons.
+             *
+             * CH1
+             * OS2
+             * EP3
+             * AG4
+             * 05OR
+             * 06
+             *
+             * will immediately call:
+             *
+             * Home/DownloadReport
+             */
+
+        });
+
+    </script>
+
+}

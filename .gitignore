@@ -1,0 +1,66 @@
+# Visual Studio
+.vs/
+*.user
+*.userosscache
+*.suo
+*.sln.docstates
+*.rsuser
+
+# .NET build output
+bin/
+obj/
+
+# Publish output
+publish/
+Publish/
+*.publishsettings
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.temp
+
+# Test results
+TestResults/
+*.trx
+
+# NuGet
+packages/
+*.nupkg
+*.snupkg
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Local application configuration
+appsettings.json
+appsettings.*.json
+!appsettings.example.json
+
+# Private runtime files and packaged output
+PublishedApp/
+Templates/
+App_Data/
+outputs/
+artifacts/
+*.zip
+*.bak
+*.backup-*
+*.before-*
+buildlog.txt
+PACKAGE-MANIFEST.json
+.env
+.env.*
+*.pfx
+*.p12
+*.key
+# Deployment setup belongs to the original environment
+.github/workflows/deploy.yml
+# Generated/downloaded reports and private workbook data
+wwwroot/report/
+*.xlsx
+*.xls
+*.csv

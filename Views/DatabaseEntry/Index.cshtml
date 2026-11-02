@@ -1,0 +1,305 @@
+﻿@model IEnumerable<OYA_Web_Application.Models.DatabaseEntryModel>
+
+@{
+    ViewData["Title"] = "Distributor Management";
+}
+
+
+<link rel="stylesheet"
+      href="~/assets/css/database-entry.css"
+      asp-append-version="true" />
+
+<div class="distributor-page">
+
+    <!-- HEADER -->
+    <div class="distributor-header">
+
+        <div class="header-left">
+
+            <div class="header-icon">
+                D
+            </div>
+
+            <div>
+                <h1>Distributor Management</h1>
+                <p>Manage distributor records.</p>
+            </div>
+
+        </div>
+
+        <div class="header-actions">
+            <a asp-controller="DatabaseEntry"
+               asp-action="Create"
+               class="add-distributor-btn">
+
+                <span class="add-icon">+</span>
+                Add Distributor
+
+            </a>
+        </div>
+
+    </div>
+
+
+    <!-- CONTENT -->
+    <div class="distributor-content">
+
+        <!-- SUCCESS MESSAGE -->
+        @if (TempData["Success"] != null)
+        {
+            <div class="success-message">
+                @TempData["Success"]
+            </div>
+        }
+
+
+        <!-- ERROR MESSAGE -->
+        @if (TempData["Error"] != null)
+        {
+            <div class="error-message">
+                @TempData["Error"]
+            </div>
+        }
+        else if (ViewBag.Error != null)
+        {
+            <div class="error-message">
+                @ViewBag.Error
+            </div>
+        }
+
+
+        <div class="distributor-card">
+
+            <!-- TABLE HEADER -->
+            <div class="table-header">
+
+                <div>
+                    <h2>Distributors</h2>
+                    <p>List of all distributor records</p>
+                </div>
+
+                <a asp-controller="DatabaseEntry"
+                   asp-action="Create"
+                   class="add-btn">
+
+                    <span>+</span>
+                    Add Distributor
+
+                </a>
+
+            </div>
+
+
+            <!-- EMPTY STATE -->
+            @if (Model == null || !Model.Any())
+            {
+                <div class="empty-state">
+
+                    <div class="empty-icon">
+                        D
+                    </div>
+
+                    <h3>No distributors found</h3>
+
+                    <p>
+                        Start by adding your first distributor.
+                    </p>
+
+                    <a asp-controller="DatabaseEntry"
+                       asp-action="Create"
+                       class="empty-add-btn">
+
+                        + Add Distributor
+
+                    </a>
+
+                </div>
+            }
+            else
+            {
+                <!-- TABLE -->
+                <div class="table-wrapper">
+
+                    <table class="distributor-table">
+
+                        <thead>
+                            <tr>
+
+                                <th>Customer</th>
+                                <th>Name</th>
+                                <th>Sheet</th>
+                                <th>Code</th>
+                                <th>Region</th>
+                                <th>Territory</th>
+                                <th>HQ</th>
+                                <th>Row</th>
+                                <th>Start</th>
+                                <th>Terr</th>
+                                <th>Dsc</th>
+                                <th>Store</th>
+                                <th>De</th>
+                                <th>Previous Year Total</th>
+                                <th>Plan</th>
+                                <th>International Row</th>
+                                <th>West Row</th>
+                                <th>East Row</th>
+                                <th>Central Row</th>
+                                <th>Status</th>
+
+                            </tr>
+                        </thead>
+
+
+                        <tbody>
+
+                            @foreach (var distributor in Model)
+                            {
+                                <tr>
+
+                                    <!-- CUSTOMER -->
+                                    <td>
+                                        @distributor.Customer
+                                    </td>
+
+
+                                    <!-- NAME -->
+                                    <td>
+                                        @distributor.Name
+                                    </td>
+
+
+                                    <!-- SHEET -->
+                                    <td>
+                                        @distributor.Sheet
+                                    </td>
+
+
+                                    <!-- CODE -->
+                                    <td>
+                                        @distributor.Code
+                                    </td>
+
+
+                                    <!-- REGION -->
+                                    <td>
+                                        @distributor.Region
+                                    </td>
+
+
+                                    <!-- TERRITORY -->
+                                    <td>
+                                        @distributor.Territory
+                                    </td>
+
+
+                                    <!-- HQ -->
+                                    <td>
+                                        @distributor.HQ
+                                    </td>
+
+
+                                    <!-- ROW -->
+                                    <td>
+                                        @distributor.Row
+                                    </td>
+
+
+                                    <!-- START -->
+                                    <td>
+                                        @distributor.Start
+                                    </td>
+
+
+                                    <!-- TERR -->
+                                    <td>
+                                        @distributor.Terr
+                                    </td>
+
+
+                                    <!-- DSC -->
+                                    <td>
+                                        @distributor.Dsc
+                                    </td>
+
+
+                                    <!-- STORE -->
+                                    <td>
+                                        @distributor.Store
+                                    </td>
+
+
+                                    <!-- DE -->
+                                    <td>
+                                        @distributor.De
+                                    </td>
+
+
+                                    <!-- PREVIOUS YEAR TOTAL -->
+                                    <td>
+                                        @distributor.PrevYearTotal
+                                    </td>
+
+
+                                    <!-- PLAN -->
+                                    <td>
+                                        @distributor.Plan
+                                    </td>
+
+
+                                    <!-- INTERNATIONAL ROW -->
+                                    <td>
+                                        @distributor.InternationalRow
+                                    </td>
+
+
+                                    <!-- WEST ROW -->
+                                    <td>
+                                        @distributor.WestRow
+                                    </td>
+
+
+                                    <!-- EAST ROW -->
+                                    <td>
+                                        @distributor.EastRow
+                                    </td>
+
+
+                                    <!-- CENTRAL ROW -->
+                                    <td>
+                                        @distributor.CentralRow
+                                    </td>
+
+
+                                    <!-- STATUS -->
+                                    <td>
+
+                                        @if (distributor.IsActive)
+                                        {
+                                            <span class="status active">
+                                                Active
+                                            </span>
+                                        }
+                                        else
+                                        {
+                                            <span class="status inactive">
+                                                Inactive
+                                            </span>
+                                        }
+
+                                    </td>
+
+                                </tr>
+                            }
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+            }
+
+        </div>
+
+    </div>
+
+</div>
