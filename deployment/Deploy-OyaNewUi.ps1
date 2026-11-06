@@ -19,6 +19,32 @@ foreach ($path in @('appsettings.json','appsettings.Production.json','Templates'
 $configPath = Join-Path $site 'appsettings.json'
 if (-not (Test-Path $configPath)) { throw 'Provision private appsettings.json on OYA-DEV01 before deploying.' }
 $configHash = (Get-FileHash $configPath -Algorithm SHA256).Hash
+$azureSettings = @{
+    TenantId = $env:OYA_AZURE_TENANT_ID
+    ClientId = $env:OYA_AZURE_CLIENT_ID
+    ClientSecret = $env:OYA_AZURE_CLIENT_SECRET
+}
+foreach ($key in $azureSettings.Keys) {
+    if ([string]::IsNullOrWhiteSpace($azureSettings[$key])) { throw 'Required Azure Actions secrets are missing.' }
+}
+foreach ($key in @('TenantId','ClientId')) {
+    $parsedGuid = [guid]::Empty
+    if (-not [guid]::TryParse($azureSettings[$key],[ref]$parsedGuid)) { throw 'Azure application identifiers are invalid.' }
+}
+$privateSettingsPath = Join-Path $root 'private\appsettings.json'
+if (-not (Test-Path $privateSettingsPath)) { throw 'Private settings backup is missing.' }
+$configBackupDir = Join-Path $root ('private\config-backups\deploy-' + [guid]::NewGuid().ToString('N'))
+function Set-AzureSettings([string]$Path) {
+    try { $settings = Get-Content -LiteralPath $Path -Raw | ConvertFrom-Json }
+    catch { throw 'Private runtime settings are invalid JSON.' }
+    foreach ($section in @('AzureAd','KeyVault')) {
+        if (-not $settings.$section) { throw 'Expected Azure runtime settings section is missing.' }
+        foreach ($key in $azureSettings.Keys) { $settings.$section.$key = $azureSettings[$key] }
+    }
+    $temp = $Path + '.azure-deploy.tmp'
+    [IO.File]::WriteAllText($temp,($settings | ConvertTo-Json -Depth 32),[Text.UTF8Encoding]::new($false))
+    Move-Item -LiteralPath $temp -Destination $Path -Force
+}
 $offline = Join-Path $site 'app_offline.htm'
 if (Test-Path $offline) { throw 'The site already has app_offline.htm; inspect before deploying.' }
 $lockPath = Join-Path $root 'deploy.lock'
@@ -61,7 +87,13 @@ try {
         Copy-App $site $backup
         $backupReady = $true
     }
+    New-Item -ItemType Directory -Path $configBackupDir -Force | Out-Null
+    Copy-Item -LiteralPath $configPath -Destination (Join-Path $configBackupDir 'site-appsettings.json')
+    Copy-Item -LiteralPath $privateSettingsPath -Destination (Join-Path $configBackupDir 'private-appsettings.json')
     $mutated = $true
+    Set-AzureSettings $configPath
+    Set-AzureSettings $privateSettingsPath
+    $configHash = (Get-FileHash $configPath -Algorithm SHA256).Hash
     Copy-App $source $site
     if ((Get-FileHash $configPath -Algorithm SHA256).Hash -ne $configHash) { throw 'Private settings changed during deployment.' }
     Remove-Item -LiteralPath $offline -Force
@@ -69,6 +101,13 @@ try {
     Write-Host ('Deployed ' + $ExpectedCommit + ' to OYA-DEV01 at http://localhost:8080.')
 } catch {
     $failure = $_
+    foreach ($restore in @(
+        @{Backup='site-appsettings.json';Target=$configPath},
+        @{Backup='private-appsettings.json';Target=$privateSettingsPath}
+    )) {
+        $saved = Join-Path $configBackupDir $restore.Backup
+        if (Test-Path $saved) { Copy-Item -LiteralPath $saved -Destination $restore.Target -Force }
+    }
     if ($mutated -and $backupReady) {
         Set-Content -LiteralPath $offline -Value 'Restoring previous OYA release.' -Encoding UTF8
         Start-Sleep -Seconds 5

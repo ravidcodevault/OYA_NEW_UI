@@ -57,6 +57,9 @@ jobs:
         env:
           PACKAGE_PATH: ${{ runner.temp }}/oya-new-ui-package-${{ github.run_id }}-${{ github.run_attempt }}
           EXPECTED_COMMIT: ${{ github.sha }}
+          OYA_AZURE_TENANT_ID: ${{ secrets.OYA_AZURE_TENANT_ID }}
+          OYA_AZURE_CLIENT_ID: ${{ secrets.OYA_AZURE_CLIENT_ID }}
+          OYA_AZURE_CLIENT_SECRET: ${{ secrets.OYA_AZURE_CLIENT_SECRET }}
         run: |
           & "$env:PACKAGE_PATH\deployment\Deploy-OyaNewUi.ps1" -PackagePath $env:PACKAGE_PATH -ExpectedCommit $env:EXPECTED_COMMIT
           if ($LASTEXITCODE -ne 0) { throw 'Deployment failed.' }
